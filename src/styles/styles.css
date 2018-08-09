@@ -1,0 +1,90 @@
+/* Styles */
+/* #app{    
+    min-width: auto;
+    max-width: auto;
+    margin: 0 auto;
+} */
+
+/* a.active{
+    color: orange;
+} */
+
+nav{
+    padding-top: 20px;
+}
+
+#logo-nav-bar
+{
+    width: 30px;
+}
+
+.overlay {
+    position: fixed;  
+    /* left: 50%;*/
+    top: 50%; 
+    opacity: .5;
+    z-index: 999;
+}
+
+body {
+    padding-top: 3.5rem;        
+  }
+.starter-template {
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+
+.form-inline
+{
+    align-items: baseline;
+}
+
+#btn-log-in{
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+#btn-log-in:hover{
+    background-color: #EFE2B5;
+    color: #212A33;
+    border: 1px solid #EFE2B5;
+}
+
+.sign-up:hover{
+    text-decoration: underline;
+}
+
+.navbar-nav > li{
+    border-bottom: 1px solid grey;
+}
+
+.center-form-container
+{
+    width: auto;   
+    background-color: #EFEFEF; 
+}
+
+.register-form > .form-row
+{    
+    background-color: white;
+}
+.bg-transparent
+{
+    background-color: #fff;
+}
+@media (min-width: 767px){
+    .sign-up {
+        color: #EFE2B5;
+    }
+
+    .navbar-nav > li{
+        border-bottom: initial;
+    }   
+    
+    .center-form-container{
+        width: 50%;
+    }
+    
+}
+
