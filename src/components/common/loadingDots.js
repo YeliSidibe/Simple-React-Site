@@ -27,7 +27,7 @@ class LoadingDots extends React.Component {
       dots--;
     }
     // return <span {...this.props}>{text}&nbsp;</span>;
-    return <div className="display-1 overlay"><div className="fa fa-spinner fa-spin md"></div> </div>    
+    return <div className="display-1 overlay"><div className="fa fa-spinner fa-spin md"></div></div>;    
   }
 }
 

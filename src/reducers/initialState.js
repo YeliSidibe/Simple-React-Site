@@ -4,5 +4,6 @@ export default
     customers:[],
     vehicles:[],
     ajaxCallsInProgress : 0,
-    showIdentityMenu : true
+    showIdentityMenu : true,
+    profile : {}
 };

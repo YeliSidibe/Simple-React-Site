@@ -8,6 +8,7 @@ import routes from './routes';
 import {LoadVehicles} from './actions/vehicleActions';
 import {LoadCustomers} from './actions/customerActions';
 import {ShowIdentityMenuSuccess} from './actions/menuActions';
+
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import '../node_modules/bootstrap/dist/js/bootstrap.js';

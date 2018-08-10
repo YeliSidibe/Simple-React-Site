@@ -23,7 +23,7 @@ class vehicleList extends Component
                        {renderedItems.map(vehicle => <VehicleListRow key={vehicle.Id} vehicle={vehicle}/>)}                  
                </div>
                <div className="d-flex justify-content-center mt-2">
-                    {renderedItems.length > 0 && <Paginator onPageChange={this.onPageChange}/> }
+                    {renderedItems.length > 0 && <Paginator onPageChange={this.onPageChange}/>}
                </div>                       
             </div>        
        );
