@@ -1,24 +1,41 @@
-import React from "react";
+import React, { Component, PropTypes } from 'react';
 import TextInputHtmlControl from "../common/textInputHtmlControl";
 import ErrorList from '../common/errorslist';
 
-const registerForm = ({ profile, onSave, onChange, loading, errors }) => {
-    return (
-        <div>
+export default class registerForm extends Component
+{
+    constructor(props,context)
+    {
+        super(props,context);   
+        this.state = {type:'password'};
+        this.onShowHide = this.onShowHide.bind(this);     
+    }
+
+    onShowHide(e) 
+    {
+        e.preventDefault();
+        e.stopPropagation();
+        this.setState({type : this.state.type === 'input' ? 'password' : 'input'});
+    }
+    
+    render()
+    {
+        return(
+            <div>
             <form className="needs-validation py-2 rounded register-form" novalidate="noValidate">
-                <ErrorList errors = {errors}/>
+                <ErrorList errors = {this.props.errors}/>
                 <div className="form-row my-2 px-2 py-2">
                     <div className="col-md-6 mb-1">
                         <div className="input-group">
-                            <input type="text" name="FirstName" className="form-control" placeholder="First name" onChange={onChange} value={profile.FirstName} required />
+                            <input type="text" name="FirstName" className="form-control" placeholder="First name" onChange={this.props.onChange} value={this.props.profile.FirstName} required />
                         </div>
                     </div>
                     <div className="col-md-6 mb-1">
-                        <input type="text" name="MiddleName" className="form-control" placeholder="Middle name (optional)" onChange={onChange} value={profile.MiddleName} />
+                        <input type="text" name="MiddleName" className="form-control" placeholder="Middle name (optional)" onChange={this.props.onChange} value={this.props.profile.MiddleName} />
                     </div>
                     <div className="col-md-12 mb-1">
                         <div className="input-group">
-                            <input type="text" name="LastName" className="form-control" placeholder="Lastname" onChange={onChange} value={profile.LastName} required />
+                            <input type="text" name="LastName" className="form-control" placeholder="Lastname" onChange={this.props.onChange} value={this.props.profile.LastName} required />
                         </div>
                     </div>
                 </div>
@@ -30,7 +47,7 @@ const registerForm = ({ profile, onSave, onChange, loading, errors }) => {
                                     <i className="fa fa-envelope-o fa-fw"></i>
                                 </button>
                             </span>
-                            <input className="py-2 form-control" name="EmailAddress" type="text" placeholder="Your Email address" onChange={onChange} value={profile.EmailAddress} required />
+                            <input className="py-2 form-control" name="EmailAddress" type="text" placeholder="Your Email address" onChange={this.props.onChange} value={this.props.profile.EmailAddress} required />
                         </div>
                     </div>
                     <div className="col-md-6 mb-1">
@@ -40,10 +57,10 @@ const registerForm = ({ profile, onSave, onChange, loading, errors }) => {
                                     <i className="fa fa-unlock-alt fa-fw"></i>
                                 </button>
                             </span>
-                            <input className="py-2 form-control" name="Password" type="password" placeholder="Create your password" required onChange={onChange} value={profile.Password} />
+                            <input className="py-2 form-control" name="Password" type={this.state.type} placeholder="Create your password" required onChange={this.props.onChange} value={this.props.profile.Password} />
                             <span className="input-group-append">
-                                <button className="btn btn-outline-secondary border-left-0 border" type="button">
-                                    <i className="fa fas fa-eye"></i>
+                                <button className="btn btn-outline-secondary border-left-0 border" type="button" onClick={this.onShowHide}>
+                                    <i className={this.state.type === 'password' ? 'fa fas fa-eye fa-fw' : 'fa fas fa-eye-slash fa-fw'}></i>
                                 </button>
                             </span>
                         </div>
@@ -52,11 +69,10 @@ const registerForm = ({ profile, onSave, onChange, loading, errors }) => {
                 <div className="form-row my-2 px-2 py-2">
                     <div className="col-md-12 mb-1">
                         <div className="input-group">
-                            <div className="input-group-prepend w-50">
-                                <span className="input-group-text">Mobile</span>
-                                <input type="text" name="AreaCode" className="input-group-text bg-transparent form-control" placeholder="Code" required onChange={onChange} value={profile.AreaCode} />
-                            </div>
-                            <input type="text" name="PhoneNumber" className="form-control w-50" placeholder="### ####" required onChange={onChange} value={profile.PhoneNumber} />
+                            <div className="input-group-prepend">
+                                <span className="input-group-text">Mobile</span>                                
+                            </div>                            
+                            <input type="tel" name="PhoneNumber" className="form-control" placeholder="(###) ### ####" required onChange={this.props.onChange} value={this.props.profile.PhoneNumber} required/>
                         </div>
                     </div>
                 </div>
@@ -66,19 +82,19 @@ const registerForm = ({ profile, onSave, onChange, loading, errors }) => {
                     </div>
                 </div>
                 <div className="form-row my-2 px-2 py-2">
-                    <input type="submit" className="form-control btn btn-primary" value="Complete" onClick={onSave} />
+                    <input type="submit" className="form-control btn btn-primary" value="Complete" onClick={this.props.onSave} />
                 </div>
             </form>
         </div>
-    );
-};
+        );
+    }
+}
 
 registerForm.propTypes = {
-    profile: React.PropTypes.object.isRequired,
-    onSave: React.PropTypes.func.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    loading: React.PropTypes.bool,
-    errors: React.PropTypes.array.isRequired
+    profile: PropTypes.object.isRequired,
+    onSave: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    loading: PropTypes.bool,
+    errors: PropTypes.array.isRequired
 };
 
-export default registerForm;
