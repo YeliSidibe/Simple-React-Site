@@ -1,10 +1,12 @@
 import React from "react";
 import TextInputHtmlControl from "../common/textInputHtmlControl";
+import ErrorList from '../common/errorslist';
 
 const registerForm = ({ profile, onSave, onChange, loading, errors }) => {
     return (
         <div>
             <form className="needs-validation py-2 rounded register-form" novalidate="noValidate">
+                <ErrorList errors = {errors}/>
                 <div className="form-row my-2 px-2 py-2">
                     <div className="col-md-6 mb-1">
                         <div className="input-group">
@@ -54,9 +56,9 @@ const registerForm = ({ profile, onSave, onChange, loading, errors }) => {
                                 <span className="input-group-text">Mobile</span>
                                 <input type="text" name="AreaCode" className="input-group-text bg-transparent form-control" placeholder="Code" required onChange={onChange} value={profile.AreaCode} />
                             </div>
-                            <input type="text" name="PhoneNumber" className="form-control w-50" placeholder="### ####" required onChange={onChange} value={profile.PhoneNumber} />                            
+                            <input type="text" name="PhoneNumber" className="form-control w-50" placeholder="### ####" required onChange={onChange} value={profile.PhoneNumber} />
                         </div>
-                    </div>                    
+                    </div>
                 </div>
                 <div className="form-row">
                     <div className="col-md-12 mb-1">
@@ -76,7 +78,7 @@ registerForm.propTypes = {
     onSave: React.PropTypes.func.isRequired,
     onChange: React.PropTypes.func.isRequired,
     loading: React.PropTypes.bool,
-    errors: React.PropTypes.object
+    errors: React.PropTypes.array.isRequired
 };
 
 export default registerForm;

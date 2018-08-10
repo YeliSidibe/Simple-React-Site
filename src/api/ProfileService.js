@@ -21,7 +21,8 @@ export default class ProfileService {
             //         //reject(profile); // should be rejected                
             //         resolve(profile);
             //     });
-            let response = { Errors: [], Success: true, profile, jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" };
+            profile.FirstName = "Khairati";
+            let response = { errors: ["Please enter a valid phone number","An error occured while creating a profile"], success: false, userProfile : profile};
             resolve(response);
         });
 

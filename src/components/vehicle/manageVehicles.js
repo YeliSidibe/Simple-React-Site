@@ -16,7 +16,7 @@ class manageVehicles extends Component {
     }
     componentWillReceiveProps(nextProps)
     {
-        // when the state changes update the state. Necessary to update the vehicle when existing vehicle is loaded directly
+        // when the state changes update the state. Necessary to update the vehicle when existing vehicle is loaded directly        
         if(this.state.vehicle.Id != nextProps.vehicle.Id){ this.setState({vehicle:Object.assign({},nextProps.vehicle)});}
     }
     updateVehicleState(event)
