@@ -9,7 +9,12 @@ class vehicles extends Component {
   constructor(props,context)
   {
     super(props,context);
-    this.redirectToCreateVehicle = this.redirectToCreateVehicle.bind(this);
+    this.redirectToCreateVehicle = this.redirectToCreateVehicle.bind(this); 
+  }
+  componentWillMount()
+  {
+    const isLoggedIn = localStorage.getItem("auth_token") != null && localStorage.getItem("auth_token").length > 0;        
+    if(!isLoggedIn){ browserHistory.push('/signin'); }
   }
 
   redirectToCreateVehicle()
@@ -38,9 +43,9 @@ vehicles.propTypes = {
 };
 
 function mapStateToProps(state,ownProps)
-{
+{      
   return {
-    vehicles: state.vehicles
+    vehicles: state.vehicles    
   };
 }
 

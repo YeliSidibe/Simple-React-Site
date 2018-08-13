@@ -1,30 +1,54 @@
 import axios from 'axios';
+import { debug } from 'util';
+
+const getAxiosConfig = () =>
+{
+    let axiosConfig =
+        {
+            headers:
+            {
+                'Content-Type': 'application/json;',
+                "Access-Control-Allow-Origin": "*"
+                // ,"Authorization": "Basic NUd3bkJ2clh4cDpGcmlkYXkkMQ=="
+            }
+        };
+        return axiosConfig;
+};
 
 export default class ProfileService {
-    static CreateProfile(profile) {
+    static CreateProfile(profile) {        
         profile = Object.assign({}, profile); // to avoid manipulating object passed in.
         return new Promise((resolve, reject) => {
-            // let axiosConfig =
-            // {
-            //     headers:
-            //     {
-            //         'Content-Type': 'application/json;charset=UTF-8',
-            //         "Access-Control-Allow-Origin": "*",
-            //         "Authorization": "Basic NUd3bkJ2clh4cDpGcmlkYXkkMQ=="
-            //     }
-            // };
-            // axios.post('http://localhost/SelfServiceRenewal/api/v1/pdf/Post', profile, axiosConfig)
-            //     .then((res) => {
-            //         resolve(profile);
-            //     })
-            //     .catch((err) => {
-            //         //reject(profile); // should be rejected                
-            //         resolve(profile);
-            //     });
-            profile.FirstName = "Khairati";
-            let response = { errors: ["Please enter a valid phone number","An error occured while creating a profile"], success: false, userProfile : profile};
-            resolve(response);
+                        
+            axios.post('https://localhost:44350/api/v1/user/register', profile, getAxiosConfig())
+                .then((resp) => {                    
+                    let res  = resp.data;
+                    let response = { errors: res.errors, success: res.succcess, userProfile : profile,confirmEmailCallBackUrl : res.value.confirmEmailCallBackUrl};                    
+                    resolve(response);
+                })
+                .catch((err) => {                      
+                    let errors = err.errors ? err.errors : ["Systemic error " + err.message + "..."];                   
+                    let response = { errors: errors, success: false, userProfile : profile};
+                    reject(response); 
+                });                        
         });
+    }
 
+    static Authenticate(profile) {        
+        profile = Object.assign({}, profile); // to avoid manipulating object passed in.
+        return new Promise((resolve, reject) => {
+            axios.post('https://localhost:44350/api/v1/user/login', profile, getAxiosConfig())
+                .then((resp) => {                    
+                    let res  = resp.data;
+                    if(res.value.jwt){ localStorage.setItem('auth_token', res.value.jwt);}
+                    let response = { errors: res.errors, success: res.value.result.succeeded, userProfile : profile};                    
+                    resolve(response);
+                })
+                .catch((err) => {                       
+                    let errors = err.errors ? err.errors : ["Systemic error " + err.message + "..."];                   
+                    let response = { errors: errors, success: false, userProfile : profile};
+                    reject(response); 
+                });                        
+        });
     }
 }

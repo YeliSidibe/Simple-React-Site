@@ -3,16 +3,22 @@ import { connect } from 'react-redux';
 import CreateProfileForm from "./registerForm";
 import { bindActionCreators } from 'redux';
 import * as RegisterActions from '../../actions/RegisterActions';
+import * as IdentityMenuActions from '../../actions/menuActions';
 
 export class register extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = { profile: Object.assign({}, this.props.profile), errors: this.props.errors, success: this.props.success };
+        this.state = { profile: Object.assign({}, this.props.profile), errors: this.props.errors, success: this.props.success,saving: false };
         this.Register = this.Register.bind(this);
-        this.updateProfileState = this.updateProfileState.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.redirectToLogin = this.redirectToLogin.bind(this);
     }
-    
+
+    componentDidMount()
+    {           
+        this.props.hideIdentityMenuAction.HideIdentityMenu();
+    }
+
     componentWillReceiveProps(nextProps)
     {        
         if(nextProps.success != null)
@@ -25,14 +31,28 @@ export class register extends Component {
         event.preventDefault();
         event.stopPropagation();
         const form = document.getElementsByClassName('needs-validation')[0];
-        const IsValid = form.checkValidity() === true;
+        let IsValid = form.checkValidity() === true;
         form.classList.add('was-validated');
-        if (IsValid) {
-            this.props.actions.CreateProfile(this.state.profile).then(() => { this.redirectToLogin(); });            
+
+        if(this.state.profile.PhoneNumber.length < 16 )
+        {
+           this.setState({errors : ["Please provide a valid phone number ..."]}); 
+           IsValid = false;  
+        }
+        if (IsValid) 
+        {
+            this.setState({saving:true});
+            const p = Object.assign({},this.state.profile);
+            p.ConfirmPassword = this.state.profile.Password;            
+            this.setState({profile: p});
+            this.props.actions.CreateProfile(p)
+            .then(() => { this.redirectToLogin(); })
+            .catch((error) => { this.setState({errors:error.errors}); })
+            .then(() => {this.setState({saving:false});});
         }
     }
 
-    updateProfileState(event) {
+    onChange(event) {
         const field = event.target.name;
         let profile = Object.assign({}, this.state.profile);
         profile[field] = event.target.value;
@@ -52,8 +72,8 @@ export class register extends Component {
                 <CreateProfileForm
                     profile={this.state.profile}
                     onSave={this.Register}
-                    onChange={this.updateProfileState}
-                    loading={false}
+                    onChange={this.onChange}
+                    loading={this.state.saving}
                     errors={this.state.errors} />
             </div>
         );
@@ -64,7 +84,9 @@ register.propTypes = {
     profile: PropTypes.object,
     actions: PropTypes.object,
     errors: PropTypes.array,
-    success: PropTypes.bool
+    success: PropTypes.bool,
+    hideIdentityMenuAction : PropTypes.object,
+    loading : PropTypes.bool
 };
 
 register.contextTypes = {
@@ -72,15 +94,18 @@ register.contextTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-    let profile = { FirstName: "Yeli", MiddleName: "Cheick", LastName: "Sidibe", EmailAddress: "ysidibe85@gmail.com", Password: "P@ssword1", AreaCode: "850", PhoneNumber: "3396882" };    
-    return { profile: state.profile.success != null ? state.profile.userProfile : profile, 
+    let profile = { FirstName: "Yeli", MiddleName: "Cheick", LastName: "Sidibe", Email: "ysidibe85@gmail.com", Password: "P@ssword1", PhoneNumber: "8503396882",ConfirmPassword:"" };    
+    return { 
+             profile: state.profile.success != null ? state.profile.userProfile : profile, 
              errors: state.profile.errors ? state.profile.errors : [], 
-             success: state.profile.success };    
+             success: state.profile.success 
+            };    
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(RegisterActions, dispatch)
+        actions: bindActionCreators(RegisterActions, dispatch),
+        hideIdentityMenuAction : bindActionCreators(IdentityMenuActions, dispatch)
     };
 }
 

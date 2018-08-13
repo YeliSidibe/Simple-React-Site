@@ -73,6 +73,24 @@ body {
 {
     background-color: #fff;
 }
+.or-seperator {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+.or-seperator i {
+    padding: 0 10px;
+    background: #f7f7f7;
+    position: relative;
+    top: -11px;
+    z-index: 1;
+}  
+
+.btn-facebook{
+    color: #fff;
+    background-color: #3b5998;
+    border-color: rgba(0,0,0,0.2);
+}
 @media (min-width: 767px){
     .sign-up {
         color: #EFE2B5;

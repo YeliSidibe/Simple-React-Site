@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 const errorlist = ({ errors }) => {
-  debugger;
   const show = errors.length > 0;
   return (
     show &&

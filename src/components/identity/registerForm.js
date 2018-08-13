@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TextInputHtmlControl from "../common/textInputHtmlControl";
 import ErrorList from '../common/errorslist';
+import PhoneNumberInput from '../common/phoneNumberInput';
 
 export default class registerForm extends Component
 {
@@ -8,7 +9,7 @@ export default class registerForm extends Component
     {
         super(props,context);   
         this.state = {type:'password'};
-        this.onShowHide = this.onShowHide.bind(this);     
+        this.onShowHide = this.onShowHide.bind(this);         
     }
 
     onShowHide(e) 
@@ -47,7 +48,7 @@ export default class registerForm extends Component
                                     <i className="fa fa-envelope-o fa-fw"></i>
                                 </button>
                             </span>
-                            <input className="py-2 form-control" name="EmailAddress" type="text" placeholder="Your Email address" onChange={this.props.onChange} value={this.props.profile.EmailAddress} required />
+                            <input className="py-2 form-control" name="Email" type="text" placeholder="Your Email address" onChange={this.props.onChange} value={this.props.profile.Email} required />
                         </div>
                     </div>
                     <div className="col-md-6 mb-1">
@@ -71,18 +72,19 @@ export default class registerForm extends Component
                         <div className="input-group">
                             <div className="input-group-prepend">
                                 <span className="input-group-text">Mobile</span>                                
-                            </div>                            
-                            <input type="tel" name="PhoneNumber" className="form-control" placeholder="(###) ### ####" required onChange={this.props.onChange} value={this.props.profile.PhoneNumber} required/>
+                            </div>                              
+                            <PhoneNumberInput  onChange={this.props.onChange} 
+                            value={this.props.profile.PhoneNumber}/>
                         </div>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="col-md-12 mb-1">
-                        <p>By creating a profile you have read and agree to the <a href="#"><span className="text-primary">Online Privacy Statement</span></a>, <a><span className="text-primary">the MobIt SAW Terms & Conditions</span></a> and agree to receive communications electronically according to the E-Sign Disclosure and Consent Notice.</p>
+                        <p>By creating a profile you have read and agree to the <a href="#"><span className="text-primary">Online Privacy Statement</span></a>, <a href="#"><span className="text-primary">the CarBank SWAP Terms & Conditions</span></a> and agree to receive communications electronically according to the E-Sign Disclosure and Consent Notice.</p>
                     </div>
                 </div>
                 <div className="form-row my-2 px-2 py-2">
-                    <input type="submit" className="form-control btn btn-primary" value="Complete" onClick={this.props.onSave} />
+                    <input type="submit" className="form-control btn btn-primary" value={this.props.loading ? "Submitting ..." : "Complete"} onClick={this.props.onSave} />
                 </div>
             </form>
         </div>
@@ -94,7 +96,7 @@ registerForm.propTypes = {
     profile: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    loading: PropTypes.bool,
+    loading: PropTypes.bool.isRequired,
     errors: PropTypes.array.isRequired
 };
 
