@@ -30,6 +30,6 @@ export function Login(profile)
         dispatch(beginAjaxCall());        
         return ProfileService.Authenticate(profile)
         .then(response =>{dispatch(LoginSuccess(response));})
-        .catch((error) => {dispatch(LoginSuccess(error));});   
+        .catch((error) => { throw error;});   
     }
 }

@@ -47,8 +47,8 @@ export class register extends Component {
             this.setState({profile: p});
             this.props.actions.CreateProfile(p)
             .then(() => { this.redirectToLogin(); })
-            .catch((error) => { this.setState({errors:error.errors}); })
-            .then(() => {this.setState({saving:false});});
+            .catch((error) => { this.setState({errors:error.errors});})
+            .then(() => {this.setState({saving:false});});            
         }
     }
 

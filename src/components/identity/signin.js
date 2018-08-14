@@ -50,8 +50,8 @@ export class signin extends Component {
     {
         this.setState({saving:true});        
         this.props.actions.Login(this.state.profile)
-        .then(() => { this.redirectToMainPage(); })
-        .catch((error) => { this.setState({errors:error.errors,saving:false}); });      
+        .then(() => { this.redirectToMainPage();})
+        .catch((error) => { this.setState({errors:error.errors,saving:false});});      
     }
     else 
     {
