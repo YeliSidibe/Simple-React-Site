@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TextInputHtmlControl from "../common/textInputHtmlControl";
 import ErrorList from '../common/errorslist';
+import Facebook from './Facebook';
 
 export default class loginForm extends Component
 {
@@ -69,7 +70,7 @@ export default class loginForm extends Component
                     </div>
                     <p className="d-flex justify-content-center">Login with your social media account</p>
                     <div className="form-row my-2 px-2 py-2">
-                        <div className="col-md-12"><a href="#" className="form-control btn btn-primary btn-facebook"><i className="fa fa-facebook"></i>&nbsp; Facebook</a></div>                           
+                        <div className="col-md-12"><Facebook/></div>                           
                     </div>
                     <div className="form-row my-2 px-2 py-2">
                         <div className="col-md-12"><a href="#" className="form-control btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a></div>
