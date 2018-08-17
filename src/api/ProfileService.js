@@ -39,9 +39,8 @@ export default class ProfileService {
         return new Promise((resolve, reject) => {
             axios.post('https://localhost:44350/api/v1/user/login', profile, getAxiosConfig())
                 .then((resp) => {                    
-                    let res  = resp.data;
-                    if(res.value.jwt){ localStorage.setItem('auth_token', res.value.jwt);}
-                    let response = { errors: res.errors, success: res.value.result.succeeded, userProfile : profile};                    
+                    let res  = resp.data;                    
+                    let response = { errors: res.errors, success: res.value.result.succeeded, userProfile : profile};
                     resolve(response);
                 })
                 .catch((err) => {                       

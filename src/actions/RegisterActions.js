@@ -2,6 +2,7 @@ import * as Types from './actionTypes';
 import RegisterReducer from '../reducers/registerReducer';
 import {beginAjaxCall} from '../actions/ajaxStatusActions';
 import ProfileService from '../api/ProfileService';
+import {LoadVehicles} from '../actions/vehicleActions';
 
 export function CreateProfileSuccess(profile)
 {
@@ -10,7 +11,7 @@ export function CreateProfileSuccess(profile)
 
 export function LoginSuccess(profile)
 {
-    return {type:Types.LOG_IN_SUCCESS,profile}
+    return {type:Types.LOG_IN_SUCCESS,profile:profile};
 }
 export function CreateProfile(profile)
 {   
@@ -29,7 +30,7 @@ export function Login(profile)
     {
         dispatch(beginAjaxCall());        
         return ProfileService.Authenticate(profile)
-        .then(response =>{dispatch(LoginSuccess(response));})
+        .then(response =>{dispatch(LoginSuccess(response));dispatch(LoadVehicles());})
         .catch((error) => { throw error;});   
-    }
+    };
 }

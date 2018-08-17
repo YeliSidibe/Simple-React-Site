@@ -23,7 +23,7 @@ export function LoadVehicles()
 {        
     return function(dispatch)
     {    
-        dispatch(beginAjaxCall());        
+        dispatch(beginAjaxCall());    
         return VehicleService.getAllVehicles().then(vehicles =>{
             dispatch(LoadVehiclesSuccess(vehicles));
         }).catch(error => {throw(error);});

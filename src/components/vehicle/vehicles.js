@@ -9,12 +9,12 @@ class vehicles extends Component {
   constructor(props,context)
   {
     super(props,context);
-    this.redirectToCreateVehicle = this.redirectToCreateVehicle.bind(this); 
+    this.redirectToCreateVehicle = this.redirectToCreateVehicle.bind(this);     
   }
+  
   componentWillMount()
-  {
-    const isLoggedIn = localStorage.getItem("auth_token") != null && localStorage.getItem("auth_token").length > 0;        
-    if(!isLoggedIn){ browserHistory.push('/signin'); }
+  {    
+    if (!this.props.profile.success) { browserHistory.push('/signin');}
   }
 
   redirectToCreateVehicle()
@@ -39,13 +39,15 @@ class vehicles extends Component {
 }
 vehicles.propTypes = {  
   vehicles: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  profile : PropTypes.object
 };
 
 function mapStateToProps(state,ownProps)
-{      
+{    
   return {
-    vehicles: state.vehicles    
+    vehicles: state.vehicles,
+    profile : state.profile    
   };
 }
 

@@ -1,5 +1,6 @@
 import * as Types from './actionTypes';
 
+// LocalStorage example to persist auth data
 function UserIsAuthenticated()
 {
     return localStorage.getItem("auth_token") == null;
@@ -7,7 +8,7 @@ function UserIsAuthenticated()
 
 export function ShowIdentityMenuSuccess(show)
 {                
-    if(show || UserIsAuthenticated()) return {type: Types.SHOW_IDENT_MENU_SUCCESS,showIdentityMenu: true};
+    if(show) return {type: Types.SHOW_IDENT_MENU_SUCCESS,showIdentityMenu: true};
     else return {type: Types.HIDE_IDENT_MENU_SUCCESS,showIdentityMenu: false};
 }
 

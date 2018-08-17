@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TextInputHtmlControl from "../common/textInputHtmlControl";
 import ErrorList from '../common/errorslist';
-import Facebook from './Facebook';
+import Facebook from './facebook';
 
 export default class loginForm extends Component
 {
@@ -70,7 +70,13 @@ export default class loginForm extends Component
                     </div>
                     <p className="d-flex justify-content-center">Login with your social media account</p>
                     <div className="form-row my-2 px-2 py-2">
-                        <div className="col-md-12"><Facebook/></div>                           
+                        <div className="col-md-12">
+                        <Facebook
+                        componentClicked = {this.props.componentClicked}
+                        onFailure = {this.props.onFailure}
+                        facebookCallbackFunction={this.props.facebookCallbackFunction} 
+                        />
+                        </div>                           
                     </div>
                     <div className="form-row my-2 px-2 py-2">
                         <div className="col-md-12"><a href="#" className="form-control btn btn-danger"><i className="fa fa-google"></i>&nbsp; Google</a></div>
@@ -86,6 +92,9 @@ loginForm.propTypes = {
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
-    errors: PropTypes.array.isRequired
+    errors: PropTypes.array,
+    componentClicked : PropTypes.func.isRequired,
+    facebookCallbackFunction : PropTypes.func.isRequired,
+    onFailure : PropTypes.func.isRequired
 };
 

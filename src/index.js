@@ -5,7 +5,6 @@ import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 import {Router,browserHistory} from 'react-router';
 import routes from './routes';
-import {LoadVehicles} from './actions/vehicleActions';
 import {LoadCustomers} from './actions/customerActions';
 import {ShowIdentityMenuSuccess} from './actions/menuActions';
 
@@ -17,7 +16,6 @@ import './styles/styles.css'; // WebPack can import files too!
 
 const store = configureStore();
 store.dispatch(ShowIdentityMenuSuccess());
-store.dispatch(LoadVehicles());
 store.dispatch(LoadCustomers());
 
 

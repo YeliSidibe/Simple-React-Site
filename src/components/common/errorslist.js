@@ -1,7 +1,11 @@
 import React, { PropTypes } from 'react';
 
 const errorlist = ({ errors }) => {
-  const show = errors.length > 0;
+  let show = false;
+  if(errors)
+  {
+    show = errors.length > 0;
+  }
   return (
     show &&
     <div className="form-row my-2 px-2 py-1">
@@ -15,7 +19,7 @@ const errorlist = ({ errors }) => {
 };
 
 errorlist.propTypes = {
-  errors: PropTypes.array.isRequired
+  errors: PropTypes.array
 };
 
 export default errorlist;

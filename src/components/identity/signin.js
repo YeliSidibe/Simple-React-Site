@@ -4,8 +4,7 @@ import LoginForm from './loginForm';
 import { bindActionCreators } from 'redux';
 import * as RegisterActions from '../../actions/RegisterActions';
 import * as IdentityMenuActions from '../../actions/menuActions';
-
-
+import * as VehicleActions from '../../actions/vehicleActions';
 
 export class signin extends Component {
   
@@ -16,6 +15,9 @@ export class signin extends Component {
       this.Authenticate = this.Authenticate.bind(this);
       this.onChange = this.onChange.bind(this);
       this.redirectToMainPage = this.redirectToMainPage.bind(this);
+      this.componentClicked = this.componentClicked.bind(this);
+      this.facebookCallbackFunction = this.facebookCallbackFunction.bind(this);
+      this.onFailure = this.onFailure.bind(this);
   }
 
   componentDidMount()
@@ -51,7 +53,7 @@ export class signin extends Component {
         this.setState({saving:true});        
         this.props.actions.Login(this.state.profile)
         .then(() => { this.redirectToMainPage();})
-        .catch((error) => { this.setState({errors:error.errors,saving:false});});      
+        .catch((error) => { this.setState({errors:error.errors,saving:false});});          
     }
     else 
     {
@@ -61,11 +63,21 @@ export class signin extends Component {
   }
 
   redirectToMainPage()
-  {      
+  {          
     if(this.state.success)
-    {
+    {            
       this.context.router.push('/vehicles');
     }         
+  }
+  
+  componentClicked(event)
+  {
+        
+  }
+  onFailure(e) { throw('Systemic Error occured ...');  }
+  facebookCallbackFunction(response)
+  {
+        console.log(response);
   }
 
   render() {
@@ -80,7 +92,10 @@ export class signin extends Component {
               onSave={this.Authenticate}
               onChange={this.onChange}
               loading={this.state.saving}
-              errors={this.state.errors} />
+              errors={this.state.errors}
+              componentClicked = {this.componentClicked}
+              onFailure = {this.onFailure}
+              facebookCallbackFunction={this.facebookCallbackFunction} />
      </div>
     );
   }
@@ -99,12 +114,12 @@ signin.contextTypes = {
   router: PropTypes.object
 };
 
-function mapStateToProps (state,ownProps){
+function mapStateToProps (state,ownProps){  
   let profile = { Email: "ysidibe85@gmail.com", Password: "P@ssword1" };  
   if(state.profile.success != null)
   {
     profile =  Object.assign({},state.profile.userProfile);    
-  }
+  }  
   return { 
           profile: profile, 
           errors: state.profile.errors ? state.profile.errors : [], 

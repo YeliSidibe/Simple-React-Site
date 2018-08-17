@@ -8,19 +8,8 @@ export default class Facebook extends Component {
     {
        super(props,context);
        this.state = {isLoggedIn : false,userId : '',name:'',email:'',picture:''};
-       this.componentClicked = this.componentClicked.bind(this);
-       this.facebookCallbackFunction = this.facebookCallbackFunction.bind(this);
-    }
-
-    componentClicked(event)
-    {
-        alert('clicked');
-    }
-
-    facebookCallbackFunction(event)
-    {
-        alert('callback function called');
-    }
+      
+    }    
     
     renderFacebookElement(renderProps)
     {
@@ -39,10 +28,12 @@ export default class Facebook extends Component {
          appId="256896758476426"
          autoLoad
          fields="name,email,picture"
-         onClick={this.componentClicked}
-         callback={this.facebookCallbackFunction} 
+         onClick={this.props.componentClicked}
+         onFailure = {this.props.onFailure}
+         callback={this.props.facebookCallbackFunction} 
          cssClass="form-control btn btn-primary btn-facebook"
-         textButton='  Facebook'
+         textButton="  Facebook"
+         isMobile = {true}
          icon = {<i className="fa fa-facebook"></i>}
          render={this.renderFacebookElement}/>);
       }
@@ -54,8 +45,9 @@ export default class Facebook extends Component {
   }
 }
 
-Facebook.propTypes = 
-{
-
+Facebook.propTypes= {
+    componentClicked : PropTypes.func.isRequired,
+    facebookCallbackFunction : PropTypes.func.isRequired,
+    onFailure : PropTypes.func.isRequired
 };
 
