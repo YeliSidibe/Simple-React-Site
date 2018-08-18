@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 export default class Home extends React.Component {
   render() {
     return (
-      <main role="main">      
+      <main role="main">     
           <div className="container">
               <h1>MobIt Admin</h1>
               <p>React, Redux and react router ultra responsive</p>

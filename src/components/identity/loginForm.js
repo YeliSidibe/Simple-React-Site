@@ -63,7 +63,7 @@ export default class loginForm extends Component
                         </div>
                     </div>
                     <div className="form-row my-2 px-2 py-2">
-                        <input type="submit" className="form-control btn btn-primary" value={this.props.loading ? "Submitting ..." : "Continue"} onClick={this.props.onSave} />
+                        <input type="submit" className="form-control btn btn-primary" value={this.props.loading ? "Submitting ..." : "Continue"} onClick={this.props.onSave} disabled={this.props.loading} />
                     </div>
                     <div className="or-seperator">
                         <i>or</i>   

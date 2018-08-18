@@ -28,27 +28,31 @@ export class register extends Component {
     }
 
     Register(event) {
+        this.setState({errors : []});
         event.preventDefault();
         event.stopPropagation();
         const form = document.getElementsByClassName('needs-validation')[0];
         let IsValid = form.checkValidity() === true;
         form.classList.add('was-validated');
 
-        if(this.state.profile.PhoneNumber.length < 16 )
-        {
-           this.setState({errors : ["Please provide a valid phone number ..."]}); 
-           IsValid = false;  
-        }
         if (IsValid) 
         {
-            this.setState({saving:true});
-            const p = Object.assign({},this.state.profile);
-            p.ConfirmPassword = this.state.profile.Password;            
-            this.setState({profile: p});
-            this.props.actions.CreateProfile(p)
-            .then(() => { this.redirectToLogin(); })
-            .catch((error) => { this.setState({errors:error.errors});})
-            .then(() => {this.setState({saving:false});});            
+            if(this.state.profile.PhoneNumber.length < 16 )
+            {
+               this.setState({errors : ["Please provide a valid phone number ..."]});
+            }
+            else
+            {
+                this.setState({saving:true});
+                const p = Object.assign({},this.state.profile);
+                p.ConfirmPassword = this.state.profile.Password;            
+                this.setState({profile: p});
+                this.props.actions.CreateProfile(p)
+                .then(() => { this.redirectToLogin(); })
+                .catch((error) => { this.setState({errors:error.errors});})
+                .then(() => {this.setState({saving:false});});            
+            }
+            
         }
     }
 

@@ -9,11 +9,11 @@ export default class header extends Component {
                 <a className="navbar-brand logo-nav-bar" href="#">
                     <BootstrapHeaderLogo/>
                 </a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarsExampleDefault">
+                <div className="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
                             <a className="nav-link" href="/">CarBank <span className="sr-only">(current)</span></a>

@@ -12,6 +12,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import '../node_modules/bootstrap/dist/js/bootstrap.js';
 import './styles/styles.css'; // WebPack can import files too!
+import './styles/offcanvas.css';
+import '../src/scripts/offcanvas.js';
 
 
 const store = configureStore();
