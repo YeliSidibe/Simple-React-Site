@@ -67,7 +67,7 @@ export class signin extends Component {
   }
 
   redirectToMainPage()
-  {          
+  {     
     if(this.state.success)
     {            
       this.context.router.push('/vehicles');
@@ -82,7 +82,7 @@ export class signin extends Component {
   facebookCallbackFunction(response)
   {
       if(response.id)
-      {
+      {        
           let facebookProfile  = {Email: response.email,FirstName:response.first_name,LastName:response.last_name,externalProviderLogin:true};            
           this.LoginWithFacebook(facebookProfile);
       }
@@ -95,7 +95,7 @@ export class signin extends Component {
   LoginWithFacebook(p)
   {        
       this.props.actions.Login(p)
-      .then(() => { this.redirectToUrlSuccess('/vehicles'); }) 
+      .then(() => { this.redirectToMainPage(); }) 
       .catch((error) => { this.setState({errors:error.errors});});
   }
 
