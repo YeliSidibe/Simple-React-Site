@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import IdentityMenu from './identityMenu';
+
 import BootstrapHeaderLogo from '../../images/bootstrap-solid';
 
 export default class header extends Component {
     render() {
         return (
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="header-nav">
                 <a className="navbar-brand logo-nav-bar" href="#">
                     <BootstrapHeaderLogo/>
                 </a>
@@ -14,23 +15,37 @@ export default class header extends Component {
                 </button>
 
                 <div className="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/">CarBank <span className="sr-only">(current)</span></a>
+                    <ul className="navbar-nav mr-auto list-header-menu">
+                        <li className="nav-item active" id="user-icon-profile">
+                            <a className="nav-link" href="/profile" >
+                                <span className="menu-icons"><i className="fa fa-user-circle"></i></span>
+                                <b className="bold-item-text" id="username-profile">Yeli Sidibe</b>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul className="navbar-nav mr-auto list-header-menu">                       
+                        <li className="nav-item">
+                            <a className="nav-link" href="/vehicles">
+                                <span className="menu-icons"><i className="fa fa-money"></i></span>
+                                <b className="bold-item-text">
+                                    Swap
+                                </b>
+                            </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/vehicles">Swap</a>
+                            <a className="nav-link" href="/vehicles">
+                                <span className="menu-icons"><i className="fa fa-calendar"></i></span>
+                                <b className="bold-item-text">Swap History</b></a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/vehicles">Track Swap</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Help</a>
+                            <a className="nav-link" href="#">
+                                <span className="menu-icons"><i className="fa fa-question-circle"></i></span>
+                                <b className="bold-item-text">Help</b></a>
                         </li>
                     </ul>
                     {
                         this.props.showIdentityMenu && <IdentityMenu showIdentityMenu = {this.props.showIdentityMenu} />
-                    }
+                    }                    
                 </div>
             </nav>
         );
