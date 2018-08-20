@@ -19,14 +19,13 @@ export default class ProfileService {
     static CreateProfile(profile) {        
         profile = Object.assign({}, profile); // to avoid manipulating object passed in.
         return new Promise((resolve, reject) => {
-                        
             axios.post('https://localhost:44350/api/v1/user/register', profile, getAxiosConfig())
-                .then((resp) => {                    
+                .then((resp) => {     
                     let res  = resp.data;
                     let response = { errors: res.errors, success: res.succcess, userProfile : profile,confirmEmailCallBackUrl : res.value.confirmEmailCallBackUrl};                    
                     resolve(response);
                 })
-                .catch((err) => {                      
+                .catch((err) => {                                        
                     let errors = err.errors ? err.errors : ["Systemic error " + err.message + "..."];                   
                     let response = { errors: errors, success: false, userProfile : profile};
                     reject(response); 

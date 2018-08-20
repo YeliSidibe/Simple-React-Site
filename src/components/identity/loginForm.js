@@ -75,6 +75,7 @@ export default class loginForm extends Component
                         componentClicked = {this.props.componentClicked}
                         onFailure = {this.props.onFailure}
                         facebookCallbackFunction={this.props.facebookCallbackFunction} 
+                        facebookButtonText = "  Facebook"
                         />
                         </div>                           
                     </div>

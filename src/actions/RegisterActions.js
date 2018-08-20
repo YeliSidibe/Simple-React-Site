@@ -19,7 +19,10 @@ export function CreateProfile(profile)
     {
         dispatch(beginAjaxCall());        
         return ProfileService.CreateProfile(profile)
-        .then(createProfileResponse =>{dispatch(CreateProfileSuccess(createProfileResponse));})
+        .then(createProfileResponse =>{
+            dispatch(CreateProfileSuccess(createProfileResponse));
+            if(profile.externalProviderLogin == true) { dispatch(LoadVehicles()); }
+        })
         .catch((error) => {dispatch(CreateProfileSuccess(error));});
     }; 
 }

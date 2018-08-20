@@ -26,13 +26,14 @@ export default class Facebook extends Component {
       {
         fbContent = (<FacebookLogin
          appId="256896758476426"
-         autoLoad
-         fields="name,email,picture"
+         autoLoad = {false}
+         fields="name,first_name,last_name,email,picture"
+        //  scope = "public_profile, email, user_birthday" // requests for birthday information. User will have to grant permission
          onClick={this.props.componentClicked}
          onFailure = {this.props.onFailure}
          callback={this.props.facebookCallbackFunction} 
          cssClass="form-control btn btn-primary btn-facebook"
-         textButton="  Facebook"
+         textButton={this.props.facebookButtonText}
          isMobile = {true}
          icon = {<i className="fa fa-facebook"></i>}
          render={this.renderFacebookElement}/>);
@@ -48,6 +49,7 @@ export default class Facebook extends Component {
 Facebook.propTypes= {
     componentClicked : PropTypes.func.isRequired,
     facebookCallbackFunction : PropTypes.func.isRequired,
-    onFailure : PropTypes.func.isRequired
+    onFailure : PropTypes.func.isRequired,
+    facebookButtonText: PropTypes.string.isRequired
 };
 

@@ -44,7 +44,7 @@ vehicles.propTypes = {
 };
 
 function mapStateToProps(state,ownProps)
-{    
+{   
   return {
     vehicles: state.vehicles,
     profile : state.profile    

@@ -11,7 +11,9 @@ export class register extends Component {
         this.state = { profile: Object.assign({}, this.props.profile), errors: this.props.errors, success: this.props.success,saving: false };
         this.Register = this.Register.bind(this);
         this.onChange = this.onChange.bind(this);
-        this.redirectToLogin = this.redirectToLogin.bind(this);
+        this.redirectToUrlSuccess = this.redirectToUrlSuccess.bind(this);
+        this.createFacebookProfile = this.createFacebookProfile.bind(this);
+        this.facebookCallbackFunction = this.facebookCallbackFunction.bind(this);        
     }
 
     componentDidMount()
@@ -21,9 +23,14 @@ export class register extends Component {
 
     componentWillReceiveProps(nextProps)
     {        
-        if(nextProps.success != null)
-        {
+        
+        if(nextProps.success != null && nextProps.profile != null && nextProps.profile.externalProviderLogin != true)
+        {                         
             this.setState({profile: Object.assign({},nextProps.profile),errors:nextProps.errors,success:nextProps.success});
+        }
+        else if(nextProps.profile != null && nextProps.profile.externalProviderLogin == true)
+        {
+            this.setState({errors:nextProps.errors,success:nextProps.success}); // when facebook login update state errors and success flag
         }
     }
 
@@ -37,8 +44,8 @@ export class register extends Component {
 
         if (IsValid) 
         {
-            if(this.state.profile.PhoneNumber.length < 16 )
-            {
+            if(this.state.profile.PhoneNumber.length > 0 && this.state.profile.PhoneNumber.length < 10 )
+            {                
                this.setState({errors : ["Please provide a valid phone number ..."]});
             }
             else
@@ -48,9 +55,9 @@ export class register extends Component {
                 p.ConfirmPassword = this.state.profile.Password;            
                 this.setState({profile: p});
                 this.props.actions.CreateProfile(p)
-                .then(() => { this.redirectToLogin(); })
+                .then(() => { this.redirectToUrlSuccess('/signin'); })
                 .catch((error) => { this.setState({errors:error.errors});})
-                .then(() => {this.setState({saving:false});});            
+                .then(() => {this.setState({saving:false});});                     
             }
             
         }
@@ -62,11 +69,38 @@ export class register extends Component {
         profile[field] = event.target.value;
         return this.setState({ profile: profile });
     }
-    redirectToLogin() {        
+
+    redirectToUrlSuccess(url) {  
         if (this.state.success) 
         {            
-            this.context.router.push('/signin');
+            this.redirectToUrl(url);
         }        
+    }
+
+    redirectToUrl(url) {        
+        this.context.router.push(url);      
+    }
+
+    componentClicked(event){}
+    onFailure(e) { throw('Systemic Error occured ...'); }
+    facebookCallbackFunction(response)
+    {
+        if(response.id)
+        {
+            let facebookProfile  = {Email: response.email,FirstName:response.first_name,LastName:response.last_name,externalProviderLogin:true};            
+            this.createFacebookProfile(facebookProfile);
+        }
+        else
+        {
+            this.setState({errors:["Unable to authenticate using facebook."]});
+        }
+    }
+
+    createFacebookProfile(p)
+    {        
+        this.props.actions.CreateProfile(p)
+        .then(() => { this.redirectToUrlSuccess('/vehicles'); }) 
+        .catch((error) => { this.setState({errors:error.errors});});
     }
 
     render() {
@@ -78,7 +112,10 @@ export class register extends Component {
                     onSave={this.Register}
                     onChange={this.onChange}
                     loading={this.state.saving}
-                    errors={this.state.errors} />
+                    errors={this.state.errors}
+                    componentClicked = {this.componentClicked}
+                    onFailure = {this.onFailure}
+                    facebookCallbackFunction={this.facebookCallbackFunction} />
             </div>
         );
     }
@@ -98,7 +135,7 @@ register.contextTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-    let profile = { FirstName: "Yeli", MiddleName: "Cheick", LastName: "Sidibe", Email: "ysidibe85@gmail.com", Password: "P@ssword1", PhoneNumber: "8503396882",ConfirmPassword:"" };    
+    let profile = { FirstName: "", MiddleName: "", LastName: "", Email: "", Password: "", PhoneNumber: "",ConfirmPassword:"" };        
     return { 
              profile: state.profile.success != null ? state.profile.userProfile : profile, 
              errors: state.profile.errors ? state.profile.errors : [], 

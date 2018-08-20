@@ -17,7 +17,7 @@ import '../src/scripts/offcanvas.js';
 
 
 const store = configureStore();
-store.dispatch(ShowIdentityMenuSuccess());
+store.dispatch(ShowIdentityMenuSuccess(true));
 store.dispatch(LoadCustomers());
 
 

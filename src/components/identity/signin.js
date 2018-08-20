@@ -27,9 +27,13 @@ export class signin extends Component {
 
   componentWillReceiveProps(nextProps)
   {       
-      if(nextProps.success != null)
+      if(nextProps.success != null && nextProps.profile != null && nextProps.profile.externalProviderLogin != true)
       {
           this.setState({profile: Object.assign({},nextProps.profile),errors:nextProps.errors,success:nextProps.success});
+      }
+      else if(nextProps.profile != null && nextProps.profile.externalProviderLogin == true)
+      {
+          this.setState({errors:nextProps.errors,success:nextProps.success}); // when facebook login update state errors and success flag
       }
   }
 
@@ -77,7 +81,22 @@ export class signin extends Component {
   onFailure(e) { throw('Systemic Error occured ...');  }
   facebookCallbackFunction(response)
   {
-        console.log(response);
+      if(response.id)
+      {
+          let facebookProfile  = {Email: response.email,FirstName:response.first_name,LastName:response.last_name,externalProviderLogin:true};            
+          this.LoginWithFacebook(facebookProfile);
+      }
+      else
+      {
+          this.setState({errors:["Unable to authenticate using facebook."]});
+      }
+  }
+
+  LoginWithFacebook(p)
+  {        
+      this.props.actions.Login(p)
+      .then(() => { this.redirectToUrlSuccess('/vehicles'); }) 
+      .catch((error) => { this.setState({errors:error.errors});});
   }
 
   render() {

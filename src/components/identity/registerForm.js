@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import TextInputHtmlControl from "../common/textInputHtmlControl";
 import ErrorList from '../common/errorslist';
 import PhoneNumberInput from '../common/phoneNumberInput';
+import Facebook from './facebook';
 
 export default class registerForm extends Component
 {
@@ -74,7 +75,7 @@ export default class registerForm extends Component
                                 <span className="input-group-text">Mobile</span>                                
                             </div>                              
                             <PhoneNumberInput  onChange={this.props.onChange} 
-                            value={this.props.profile.PhoneNumber}/>
+                            value={this.props.profile.PhoneNumber} required={false}/>
                         </div>
                     </div>
                 </div>
@@ -85,6 +86,19 @@ export default class registerForm extends Component
                 </div>
                 <div className="form-row my-2 px-2 py-2">
                     <input type="submit" className="form-control btn btn-primary" value={this.props.loading ? "Submitting ..." : "Complete"} onClick={this.props.onSave} />
+                </div>
+                <div className="form-row my-2 px-2 py-1">     
+                <div className="col-md-12 px-0">                               
+                    <Facebook
+                        componentClicked = {this.props.componentClicked}
+                        onFailure = {this.props.onFailure}
+                        facebookCallbackFunction={this.props.facebookCallbackFunction} 
+                        facebookButtonText = "  Sign up with facebook"
+                        />
+                </div>
+                <div className="col-md-12 px-0">                               
+                    <a href="#" className="form-control btn btn-danger"><i className="fa fa-google"></i>&nbsp; Sign up with Google</a>
+                </div>
                 </div>
             </form>
         </div>
@@ -97,6 +111,9 @@ registerForm.propTypes = {
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
-    errors: PropTypes.array.isRequired
+    errors: PropTypes.array.isRequired,
+    componentClicked : PropTypes.func.isRequired,
+    facebookCallbackFunction : PropTypes.func.isRequired,
+    onFailure : PropTypes.func.isRequired
 };
 

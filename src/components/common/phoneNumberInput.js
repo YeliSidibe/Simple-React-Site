@@ -40,7 +40,7 @@ const formatPhoneNumber = (event) =>
 	else if(input.length > 0){target.value = `(${zip}`;}
 };
 
-const PhoneNumberInput = ({onChange,PhoneNumber}) => {
+const PhoneNumberInput = ({onChange,PhoneNumber,required}) => {
   return (
     <input type="text" name="PhoneNumber" className="form-control"  maxLength ="16"
                       placeholder="(  )    -     " 
@@ -48,12 +48,13 @@ const PhoneNumberInput = ({onChange,PhoneNumber}) => {
                       onKeyDown = {validatePhoneNumber} 
                       onKeyUp = {formatPhoneNumber} 
                       value={PhoneNumber} 
-                      required/>
+                      required={required}/>
   );
 };
 PhoneNumberInput.propTypes = {
     onChange : PropTypes.func.isRequired,
-    PhoneNumber : PropTypes.string
+	PhoneNumber : PropTypes.string,
+	required: PropTypes.bool.isRequired
 };
 
 export default PhoneNumberInput;

@@ -22,10 +22,11 @@ body {
     transition-timing-function: ease-in-out;
     transition-duration: .3s;
     transition-property: left, visibility;
-    margin-bottom: 2.75rem;
+    /* margin-bottom: 2.75rem; */
+    margin-bottom: 0rem;
   }
   .offcanvas-collapse.open {
-    left: 0;
+    left: 120px;
     visibility: visible;
   }
 }
