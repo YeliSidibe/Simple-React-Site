@@ -40,18 +40,24 @@ body {
     align-items: baseline;
 }
 
-.btn-log-in-out{
-    border: 1px solid #fff;
-    color: #fff !important;
+ .btn-log-in-out{
+    color: #fff;
+    background-color: #3b5998;
+    border-color: #3b5998;    
 }
+
 
 .btn-log-in-out:hover{
-    background-color: #EFE2B5;
-    color: #212A33 !important;
-    border: 1px solid #EFE2B5 !important;
+    background-color: #3b5998;
+    color: #fff !important;
+    border: 1px solid #3b5998 !important;
 }
 
-.sign-up:hover{
+#sign-up a span {
+    color: #EFE2B5;        
+}
+
+#sign-up a span:hover{
     text-decoration: underline;
 }
 
@@ -108,10 +114,6 @@ body {
 
 
 @media (min-width: 767px){
-    .sign-up {
-        color: #EFE2B5;
-    }
-
     .navbar-nav > li{
         border-bottom: initial;
     }   
@@ -127,20 +129,25 @@ body {
     .bold-item-text {
        color: white;  
        font-weight: 100;
-    }
-
+    }    
 
 }
 
 @media (max-width: 767px){
+    
+    #sign-up
+    {
+        width: 75%;
+    }
     .bold-item-text {
         font-size: 15px;
         font-family: "Open Sans", sans-serif;
         padding: 10px 0px;
         display: inline-block;
         border-bottom: solid 1px grey;
-        width: 50%;
-        font-weight: 100;    
+        width: 75%;
+        font-weight: 100;  
+        color: white;  
     }
     
     #header-nav .list-header-menu a {
@@ -155,5 +162,24 @@ body {
     #header-nav .identity-list-menu
     {
         padding: 15px 44px;
+    }
+
+    #navbarsExampleDefault .ul-header-custom
+    {
+        margin-left: -16px !important;        
+    }
+    #navbarsExampleDefault .ul-header-custom li{
+        border-bottom: 1px solid white;
+        border-top: 1px solid white;
+        padding-left: 16px !important;        
+    }
+
+    #username-profile
+    {
+        border-bottom: none;
+    }
+
+    .btn-log-in-out{        
+        width: 75%;
     }
 }

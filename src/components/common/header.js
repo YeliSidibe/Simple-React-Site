@@ -15,14 +15,14 @@ export default class header extends Component {
                 </button>
 
                 <div className="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                    <ul className="navbar-nav mr-auto list-header-menu">
-                        <li className="nav-item active" id="user-icon-profile">
+                    <ul className="navbar-nav mr-auto list-header-menu ul-header-custom">
+                        <li className="nav-item active">
                             <a className="nav-link" href="/profile" >
                                 <span className="menu-icons"><i className="fa fa-user-circle"></i></span>
                                 <b className="bold-item-text" id="username-profile">Yeli Sidibe</b>
                             </a>
                         </li>
-                    </ul>
+                    </ul>                    
                     <ul className="navbar-nav mr-auto list-header-menu">                       
                         <li className="nav-item">
                             <a className="nav-link" href="/vehicles">
