@@ -99,7 +99,7 @@ body {
 .menu-icons
 {
     display: inline-block;
-    font-family: 'icomoon' !important;
+    /* font-family: 'icomoon' !important; */
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -121,23 +121,26 @@ body {
     .center-form-container{
         width: 50%;
     }
-    #header-nav .identity-list-menu
-    {
-        padding: initial;
-    }
-
+    
     .bold-item-text {
        color: white;  
        font-weight: 100;
     }    
 
+    #navbarsExampleDefault .ul-header-custom li a{                
+        display: flex;        
+        flex-direction: row!important;        
+        align-items: center;                 
+        
+    }
+
 }
 
 @media (max-width: 767px){
-    
+
     #sign-up
     {
-        width: 75%;
+        width: 100%;
     }
     .bold-item-text {
         font-size: 15px;
@@ -145,7 +148,7 @@ body {
         padding: 10px 0px;
         display: inline-block;
         border-bottom: solid 1px grey;
-        width: 75%;
+        width: 100%;
         font-weight: 100;  
         color: white;  
     }
@@ -159,9 +162,9 @@ body {
         vertical-align: middle;
     }
     
-    #header-nav .identity-list-menu
+    #ulist-menu-items .menu-icons
     {
-        padding: 15px 44px;
+        padding: 10px 0px;
     }
 
     #navbarsExampleDefault .ul-header-custom
@@ -171,15 +174,34 @@ body {
     #navbarsExampleDefault .ul-header-custom li{
         border-bottom: 1px solid white;
         border-top: 1px solid white;
-        padding-left: 16px !important;        
+        padding-left: 16px;            
+    }
+
+    #navbarsExampleDefault .ul-header-custom li a{                
+        display: flex;        
+        flex-direction: column;        
+        align-items: center;
+        padding: 10px 0;        
     }
 
     #username-profile
     {
         border-bottom: none;
+        font-size: 20px;        
     }
 
     .btn-log-in-out{        
-        width: 75%;
+        width: 100%;        
     }
+
+    #identity-ul
+    {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-left: 25px;
+    }
+
+    #identity-ul li{
+         padding-top: 10px;   
+    };
 }

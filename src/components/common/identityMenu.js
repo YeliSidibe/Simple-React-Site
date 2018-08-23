@@ -2,46 +2,48 @@ import React, { Component,PropTypes } from 'react';
 
 const SignInRender = ()=>
 {
-    return (<li className="nav-item active">
-                    <a className="nav-link" href="/signin">
-                        <button className="btn btn-outline-primary px-2 py-0 btn-log-in-out" type="submit">
-                            Log in
-                        </button>
-                    </a>
-</li>);  
+    return (
+                <button className="btn btn-outline-primary px-2 py-0 btn-log-in-out" type="submit">
+                    Log in
+                </button>
+            );  
 }
 
 const SignUpRender=()=>
 {
     return (
-        <li className="nav-item" id="sign-up">
-        <a className="nav-link d-flex justify-content-center" href="/register">
-            <span>Sign Up</span>
-        </a>
-    </li>
+        <span>Sign Up</span>
     );
 }
 
 const LogOutRender=()=>
 {
-    return (
-        <li className="nav-item active">
-        <a className="nav-link" href="/">
+    return (        
             <button className="btn btn-outline-primary px-2 py-0 btn-log-in-out"  type="submit">
-                LogOut
-            </button>
-        </a>
-    </li>
+                Logout
+            </button>        
     );
 }
 
 const identityMenu = ({showIdentityMenu}) => {
-    return (        
-            <ul className="navbar-nav right identity-list-menu">
-                {showIdentityMenu && <SignInRender/>}
-                {showIdentityMenu && <SignUpRender/>}
-                {!showIdentityMenu && <LogOutRender/>}
-            </ul>
+    return (                    
+            <ul className="navbar-nav right list-header-menu" id="identity-ul">                       
+                        <li className="nav-item">
+                            <a className="nav-link" href="/vehicles">                                
+                                {showIdentityMenu && <SignInRender/>}
+                            </a>
+                        </li>  
+                        <li className="nav-item">
+                            <a className="nav-link d-flex justify-content-center" href="/register">
+                                {showIdentityMenu && <SignUpRender/>}
+                            </a>
+                        </li>                         
+                        <li className="nav-item">
+                            <a className="nav-link d-flex justify-content-center" href="/register">
+                                {!showIdentityMenu && <LogOutRender/>}
+                            </a>
+                        </li>                         
+                    </ul>
     );
 };
 
