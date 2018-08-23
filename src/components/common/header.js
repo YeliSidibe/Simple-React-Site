@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import IdentityMenu from './identityMenu';
+import UserProfile from './userProfile';
 
 import BootstrapHeaderLogo from '../../images/bootstrap-solid';
 
-export default class header extends Component {
+export default class header extends Component {    
     render() {
         return (
             <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="header-nav">
@@ -15,14 +16,7 @@ export default class header extends Component {
                 </button>
 
                 <div className="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">                                
-                    <ul className="navbar-nav mr-auto list-header-menu ul-header-custom">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/profile" >
-                                <div className="menu-icons"><i className="fa fa-user-circle"></i></div>                                
-                                <div id="username-profile">Yeli Sidibe&nbsp;&nbsp;</div>
-                            </a>
-                        </li>
-                    </ul>                    
+                    <UserProfile profile= {this.props.profile}/>                    
                     <ul className="navbar-nav mr-auto list-header-menu" id="ulist-menu-items">                                               
                         <li className="nav-item">
                             <a className="nav-link d-flex flex-row" href="/vehicles">
@@ -44,7 +38,7 @@ export default class header extends Component {
                         </li>
                     </ul>
                     {
-                        this.props.showIdentityMenu && <IdentityMenu showIdentityMenu = {this.props.showIdentityMenu} />
+                        <IdentityMenu showIdentityMenu = {this.props.showIdentityMenu} profile = {this.props.profile} />
                     }                    
                 </div>
             </nav>
@@ -54,5 +48,8 @@ export default class header extends Component {
 
 header.propTypes = {
     loading: PropTypes.bool.isRequired,
-    showIdentityMenu: PropTypes.bool.isRequired
+    showIdentityMenu: PropTypes.bool.isRequired,
+    profile: PropTypes.object.isRequired
+
 };
+

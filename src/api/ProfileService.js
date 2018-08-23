@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { debug } from 'util';
+
 
 const getAxiosConfig = () =>
 {
@@ -46,7 +46,24 @@ export default class ProfileService {
                     let errors = err.errors ? err.errors : ["Systemic error " + err.message + "..."];                   
                     let response = { errors: errors, success: false, userProfile : profile};
                     reject(response); 
-                });                        
+                });  
+            //resolve({ errors: [], success: true, userProfile : profile,confirmEmailCallBackUrl : ''});                      
         });
     }
+
+    static SignOut(profile)
+    {
+        return new Promise((resolve, reject) => {
+            axios.post('https://localhost:44350/api/v1/user/logout', profile, getAxiosConfig())
+                .then((resp) => {                                        
+                    
+                })
+                .catch((err) => {                       
+                    
+                }).then(() => {resolve({});})
+            //resolve({});
+        });  
+            
+    }
+
 }

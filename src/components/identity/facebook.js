@@ -34,7 +34,7 @@ export default class Facebook extends Component {
          callback={this.props.facebookCallbackFunction} 
          cssClass="form-control btn btn-primary btn-facebook"
          textButton={this.props.facebookButtonText}
-         isMobile = {true}
+         isMobile 
          icon = {<i className="fa fa-facebook"></i>}
          render={this.renderFacebookElement}/>);
       }
