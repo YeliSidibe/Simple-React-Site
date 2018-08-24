@@ -20,9 +20,9 @@ export default class identityMenu extends Component {
     {
         return (                    
             <ul className="navbar-nav right list-header-menu" id="identity-ul">                       
-                        {this.props.showIdentityMenu && <SignInRender/>}                        
-                        {this.props.showIdentityMenu && <SignUpRender/>}                                                     
-                        {this.state.isLoggedIn == true && <LogOutRender profile={this.props.profile} />}
+                        {this.state.isLoggedIn == false && <SignInRender ShowHideCanvas = {this.props.ShowHideCanvas}/>}
+                        {this.state.isLoggedIn == false && <SignUpRender ShowHideCanvas = {this.props.ShowHideCanvas}/>}                                                     
+                        {this.state.isLoggedIn == true && <LogOutRender profile={this.props.profile} ShowHideCanvas = {this.props.ShowHideCanvas}/>}
             </ul>
         );
     }
@@ -30,7 +30,7 @@ export default class identityMenu extends Component {
 
 identityMenu.propTypes = {
     profile : PropTypes.object.isRequired,
-    showIdentityMenu: PropTypes.bool.isRequired
+    ShowHideCanvas : PropTypes.func.isRequired   
 };
 
 

@@ -3,7 +3,7 @@ import RegisterReducer from '../reducers/registerReducer';
 import {beginAjaxCall} from '../actions/ajaxStatusActions';
 import ProfileService from '../api/ProfileService';
 import {LoadVehicles} from '../actions/vehicleActions';
-import {ShowIdentityMenuSuccess} from './menuActions';
+import resetReducer from '../reducers/resetReducer';
 
 export function CreateProfileSuccess(profile)
 {
@@ -46,10 +46,10 @@ export function Login(profile)
 export function Logout(profile)
 {
     return function(dispatch,getState)
-    {
+    {        
         dispatch(beginAjaxCall());        
         return ProfileService.SignOut(profile)
-        .then(response =>{dispatch(LogoutSuccess(response));dispatch(ShowIdentityMenuSuccess(true));})
+        .then(response =>{dispatch(LogoutSuccess(response));})
         .catch((error) => { throw error;});
     };
 }

@@ -12,10 +12,12 @@ class Logout extends Component
         this.Logout = this.Logout.bind(this);
     }
     
-    Logout() 
+    Logout(event) 
     {
-       // log out user completely       
-       this.props.LogoutAction(this.props.profile);
+       event.preventDefault();
+       // should clear user session
+       this.props.LogoutAction(this.props.profile);       
+       this.props.ShowHideCanvas();
        this.context.router.push('/');
     }    
     
@@ -36,17 +38,16 @@ class Logout extends Component
 
 Logout.propsTypes = {
     profile: PropTypes.object.isRequired,
-    LogoutAction: PropTypes.object    
+    LogoutAction: PropTypes.object,
+    ShowHideCanvas : PropTypes.func.isRequired      
 };
-
 Logout.contextTypes = {
     router: PropTypes.object
 };
 function mapStateToProps(state,ownProps)
 {      
   return {
-    loading: state.ajaxCallsInProgress > 0,
-    showIdentityMenu : state.showIdentityMenu,
+    loading: state.ajaxCallsInProgress > 0,    
     profile: state.profile
   };
 }

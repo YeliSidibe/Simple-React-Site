@@ -1,16 +1,39 @@
 import React, { Component,PropTypes } from 'react';
 
-const SignInRender = ()=>
+export default class SignInRender extends Component
 {
-    return (
+    constructor(props,context)
+    {
+        super(props,context);
+        this.showHideCanvasComponent = this.showHideCanvasComponent.bind(this);
+    }
+
+    showHideCanvasComponent(event)
+    {
+        event.preventDefault();
+        this.props.ShowHideCanvas();
+        this.context.router.push('/signin');
+    }
+    
+    render()
+    {
+        return (
             <li className="nav-item">
-                <a className="nav-link" href="/signin">
+                <a className="nav-link" onClick={this.showHideCanvasComponent}>
                     <button className="btn btn-outline-primary px-2 py-0 btn-log-in-out" type="submit">
                         Log in
                     </button>
                 </a>
             </li>
             );  
+    }
+}
+
+
+SignInRender.propTypes = {    
+    ShowHideCanvas : PropTypes.func.isRequired   
 };
 
-export default SignInRender;
+SignInRender.contextTypes = {
+    router: PropTypes.object
+  };
