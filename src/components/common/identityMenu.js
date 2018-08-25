@@ -1,50 +1,36 @@
 import React, { Component,PropTypes } from 'react';
+import LogOutRender from './logout';
+import SignInRender from './signinlink';
+import SignUpRender from './signuplink';
 
-const SignInRender = ()=>
-{
-    return (
-                <button className="btn btn-outline-primary px-2 py-0 btn-log-in-out" type="submit">
-                    Log in
-                </button>
-            );  
-}
 
-const SignUpRender=()=>
-{
-    return (
-        <span>Sign Up</span>
-    );
-}
+export default class identityMenu extends Component {
 
-const LogOutRender=()=>
-{
-    return (        
-            <button className="btn btn-outline-primary px-2 py-0 btn-log-in-out"  type="submit">
-                Logout
-            </button>        
-    );
-}
-
-const identityMenu = ({showIdentityMenu}) => {
-    return (                    
+    constructor(props)
+    {        
+        super(props);
+        let isLoggedIn = props.profile != null && props.profile.success == true;        
+        this.state = {isLoggedIn : isLoggedIn};        
+    }
+    componentWillReceiveProps(nextProps)
+    {
+        this.setState({isLoggedIn : nextProps.profile != null && nextProps.profile.success == true});
+    }
+    render()
+    {
+        return (                    
             <ul className="navbar-nav right list-header-menu" id="identity-ul">                       
-                        <li className="nav-item">
-                            <a className="nav-link" href="/vehicles">                                
-                                {showIdentityMenu && <SignInRender/>}
-                            </a>
-                        </li>  
-                        <li className="nav-item">
-                            <a className="nav-link d-flex justify-content-center" href="/register">
-                                {showIdentityMenu && <SignUpRender/>}
-                            </a>
-                        </li>                         
-                        <li className="nav-item">
-                            <a className="nav-link d-flex justify-content-center" href="/register">
-                                {!showIdentityMenu && <LogOutRender/>}
-                            </a>
-                        </li>                         
-                    </ul>
-    );
+                        {this.state.isLoggedIn == false && <SignInRender ShowHideCanvas = {this.props.ShowHideCanvas}/>}
+                        {this.state.isLoggedIn == false && <SignUpRender ShowHideCanvas = {this.props.ShowHideCanvas}/>}                                                     
+                        {this.state.isLoggedIn == true && <LogOutRender profile={this.props.profile} ShowHideCanvas = {this.props.ShowHideCanvas}/>}
+            </ul>
+        );
+    }
+}
+
+identityMenu.propTypes = {
+    profile : PropTypes.object.isRequired,
+    ShowHideCanvas : PropTypes.func.isRequired   
 };
 
-export default identityMenu;
+

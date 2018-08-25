@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import LoginForm from './loginForm';
 import { bindActionCreators } from 'redux';
 import * as RegisterActions from '../../actions/RegisterActions';
-import * as IdentityMenuActions from '../../actions/menuActions';
 import * as VehicleActions from '../../actions/vehicleActions';
 
 export class signin extends Component {
@@ -18,13 +17,15 @@ export class signin extends Component {
       this.componentClicked = this.componentClicked.bind(this);
       this.facebookCallbackFunction = this.facebookCallbackFunction.bind(this);
       this.onFailure = this.onFailure.bind(this);
+      this.redirectToRegster  = this.redirectToRegster.bind(this);
   }
 
-  componentDidMount()
-  {           
-      this.props.hideIdentityMenuAction.HideIdentityMenu();
+  componentDidMount(){}
+  
+  redirectToRegster()
+  {    
+    this.context.router.push('/register');
   }
-
   componentWillReceiveProps(nextProps)
   {       
       if(nextProps.success != null && nextProps.profile != null && nextProps.profile.externalProviderLogin != true)
@@ -104,7 +105,7 @@ export class signin extends Component {
       <div className="container center-form-container mt-3">
         <div className="row px-2">
           <b className="col px-2">Log In</b>
-          <a href="/register"><span className="right pr-2 text-primary">Sign up</span></a>
+          <a onClick={this.redirectToRegster}><span className="right pr-2 text-primary">Sign up</span></a>
         </div>
         <LoginForm
               profile={this.state.profile}
@@ -125,7 +126,6 @@ signin.propTypes = {
   actions: PropTypes.object,
   errors: PropTypes.array,
   success: PropTypes.bool,
-  hideIdentityMenuAction : PropTypes.object,
   loading : PropTypes.bool
 };
 
@@ -148,8 +148,7 @@ function mapStateToProps (state,ownProps){
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(RegisterActions, dispatch),
-    hideIdentityMenuAction: bindActionCreators(IdentityMenuActions, dispatch)
+    actions: bindActionCreators(RegisterActions, dispatch)    
   };
 }
 

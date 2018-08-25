@@ -13,7 +13,7 @@ import LoadingComponent from './common/loadingDots';
             {this.props.loading && <LoadingComponent interval={100} dots={20} />}
           </div>
         </div>
-        <Header loading={this.props.loading} showIdentityMenu={this.props.showIdentityMenu} />
+        <Header loading={this.props.loading} profile={this.props.profile} />
         {this.props.children}
         {/* <div className="navbar nav-scroller bg-dark fixed-bottom">
           <nav className="nav nav-underline">
@@ -34,14 +34,14 @@ import LoadingComponent from './common/loadingDots';
 App.propTypes = {
   children: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  showIdentityMenu: PropTypes.bool.isRequired
+  profile: PropTypes.object
 };
 
 function mapStateToProps(state,ownProps)
 {      
   return {
     loading: state.ajaxCallsInProgress > 0,
-    showIdentityMenu : state.showIdentityMenu
+    profile: state.profile
   };
 }
 

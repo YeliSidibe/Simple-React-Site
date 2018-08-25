@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { debug } from 'util';
+
 
 const getAxiosConfig = () =>
 {
@@ -36,17 +36,34 @@ export default class ProfileService {
     static Authenticate(profile) {        
         profile = Object.assign({}, profile); // to avoid manipulating object passed in.
         return new Promise((resolve, reject) => {
-            axios.post('https://localhost:44350/api/v1/user/login', profile, getAxiosConfig())
-                .then((resp) => {                    
-                    let res  = resp.data;                    
-                    let response = { errors: res.errors, success: res.value.result.succeeded, userProfile : profile};
-                    resolve(response);
-                })
-                .catch((err) => {                       
-                    let errors = err.errors ? err.errors : ["Systemic error " + err.message + "..."];                   
-                    let response = { errors: errors, success: false, userProfile : profile};
-                    reject(response); 
-                });                        
+            // axios.post('https://localhost:44350/api/v1/user/login', profile, getAxiosConfig())
+            //     .then((resp) => {                    
+            //         let res  = resp.data;                    
+            //         let response = { errors: res.errors, success: res.value.result.succeeded, userProfile : profile};
+            //         resolve(response);
+            //     })
+            //     .catch((err) => {                       
+            //         let errors = err.errors ? err.errors : ["Systemic error " + err.message + "..."];                   
+            //         let response = { errors: errors, success: false, userProfile : profile};
+            //         reject(response); 
+            //     });  
+            resolve({ errors: [], success: true, userProfile : profile,confirmEmailCallBackUrl : ''});                      
         });
     }
+
+    static SignOut(profile)
+    {
+        return new Promise((resolve, reject) => {
+            // axios.post('https://localhost:44350/api/v1/user/logout', profile, getAxiosConfig())
+            //     .then((resp) => {                                        
+                    
+            //     })
+            //     .catch((err) => {                       
+                    
+            //     }).then(() => {resolve({});})            
+            resolve({});
+        });  
+            
+    }
+
 }

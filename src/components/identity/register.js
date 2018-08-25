@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import CreateProfileForm from "./registerForm";
 import { bindActionCreators } from 'redux';
 import * as RegisterActions from '../../actions/RegisterActions';
-import * as IdentityMenuActions from '../../actions/menuActions';
 
 export class register extends Component {
     constructor(props, context) {
@@ -18,7 +17,7 @@ export class register extends Component {
 
     componentDidMount()
     {           
-        this.props.hideIdentityMenuAction.HideIdentityMenu();
+        
     }
 
     componentWillReceiveProps(nextProps)
@@ -125,8 +124,7 @@ register.propTypes = {
     profile: PropTypes.object,
     actions: PropTypes.object,
     errors: PropTypes.array,
-    success: PropTypes.bool,
-    hideIdentityMenuAction : PropTypes.object,
+    success: PropTypes.bool,    
     loading : PropTypes.bool
 };
 
@@ -145,8 +143,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(RegisterActions, dispatch),
-        hideIdentityMenuAction : bindActionCreators(IdentityMenuActions, dispatch)
+        actions: bindActionCreators(RegisterActions, dispatch)     
     };
 }
 
