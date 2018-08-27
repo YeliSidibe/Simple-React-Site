@@ -64,6 +64,5 @@ header.propTypes = {
     loading: PropTypes.bool.isRequired,    
     profile: PropTypes.object.isRequired,
     ShowHideCanvas : PropTypes.func
-
 };
 

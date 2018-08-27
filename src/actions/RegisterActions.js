@@ -1,9 +1,8 @@
 import * as Types from './actionTypes';
 import RegisterReducer from '../reducers/registerReducer';
-import {beginAjaxCall} from '../actions/ajaxStatusActions';
+import {beginAjaxCall,NotifyAjaxFailure} from '../actions/ajaxStatusActions';
 import ProfileService from '../api/ProfileService';
 import {LoadVehicles} from '../actions/vehicleActions';
-import resetReducer from '../reducers/resetReducer';
 
 export function CreateProfileSuccess(profile)
 {
@@ -18,13 +17,14 @@ export function LogoutSuccess(profile)
 {
     return {type:Types.LOG_OUT_SUCCESS,profile:profile};
 }
-<<<<<<< HEAD
-export function ClearStore()
+export function SendRecoveryCodeSuccess(profile)
 {
-    return {type:Types.CLEAR_STORE_SUCCESS};
+    return {type:Types.SEND_RECOVERY_CODE_SUCCESS,profile:profile};
 }
-=======
->>>>>>> b2c27e5611c6c549d341f541553945af4604d50e
+export function ResetUserPasswordSuccess(profile)
+{
+    return {type:Types.RESET_USER_PASSWORD_SUCCESS,profile:profile};
+}
 export function CreateProfile(profile)
 {   
     return function(dispatch,getState)
@@ -46,7 +46,7 @@ export function Login(profile)
         dispatch(beginAjaxCall());        
         return ProfileService.Authenticate(profile)
         .then(response =>{dispatch(LoginSuccess(response));dispatch(LoadVehicles());})
-        .catch((error) => { throw error;});   
+        .catch((error) => { dispatch(NotifyAjaxFailure());throw error;});   
     };
 }
 
@@ -54,19 +54,31 @@ export function Logout(profile)
 {
     return function(dispatch,getState)
     {        
-        dispatch(beginAjaxCall());        
+        dispatch(beginAjaxCall());
         return ProfileService.SignOut(profile)
-<<<<<<< HEAD
-        .then(response =>{
-            dispatch(LogoutSuccess(response));            
-            dispatch(ClearStore(response));   
-        })
-        .catch((error) => { throw error;});
-    };
-}
-=======
         .then(response =>{dispatch(LogoutSuccess(response));})
-        .catch((error) => { throw error;});
+        .catch((error) => { dispatch(NotifyAjaxFailure());throw error;});
     };
 }
->>>>>>> b2c27e5611c6c549d341f541553945af4604d50e
+
+export function SendOTP(profile)
+{
+    return function(dispatch,getState)
+    {
+        dispatch(beginAjaxCall());
+        return ProfileService.SendOTP(profile)
+        .then(response =>{dispatch(SendRecoveryCodeSuccess(response));})
+        .catch((error) => { dispatch(NotifyAjaxFailure());throw error;});
+    };
+}
+
+export function ResetUserPassword(profile)
+{
+    return function(dispatch,getState)
+    {
+        dispatch(beginAjaxCall());
+        return ProfileService.ResetUserPassword(profile)
+        .then(response =>{dispatch(ResetUserPasswordSuccess(response));})
+        .catch((error) => { dispatch(NotifyAjaxFailure());throw error;});
+    };
+}

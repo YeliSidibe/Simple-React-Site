@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 export default class Home extends React.Component {
   render() {
     return (
-      <main role="main" className="main-home"> 
+      <main role="main"> 
           <div className="d-flex flex-columns justify-content-center">
               <p>welcome, ultra responsive swap app</p>                
           </div>       

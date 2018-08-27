@@ -3,17 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as RegisterActions from '../../actions/RegisterActions';
 import ErrorList from '../common/errorslist';
+import {Link} from 'react-router';
 
 class AccountRecovery extends Component {
   constructor(props, context) 
   {
       super(props, context);
-      this.state = { profile: Object.assign({}, this.props.profile), errors: this.props.errors
-                    ,saving: false,otpSent:false,savingResend:false };
+      this.state = { profile: Object.assign({}, this.props.profile), errors: this.props.errors,saving: false};
       this.SendCode = this.SendCode.bind(this);
       this.onChange = this.onChange.bind(this);
-      this.redirectToResetPassword = this.redirectToResetPassword.bind(this);
-      this.ReSendCode = this.ReSendCode.bind(this);     
+      this.redirectToResetPassword = this.redirectToResetPassword.bind(this);          
   }
 
   componentWillReceiveProps(nextProps)
@@ -33,15 +32,18 @@ class AccountRecovery extends Component {
     form.classList.add('was-validated');
     return IsValid;
   }
+
   SendCode(event)
   {    
     let IsValid = this.validateForm(event);    
     if (IsValid) 
     {
-        this.setState({saving:true});        
+        this.setState({saving:true});                
         this.props.actions.SendOTP(this.state.profile)
-        .then(() => { this.setState({otpSent:true}); })
-        .catch((error) => { this.setState({errors:error.errors,saving:false});});          
+        .then(() => { this.redirectToResetPassword(); })
+        .catch((error) => { 
+          this.setState({errors:error.errors,saving:false});
+        });          
     }
     else 
     {
@@ -49,19 +51,8 @@ class AccountRecovery extends Component {
     }
   }
 
-  ReSendCode(event)
-  {
-    let IsValid = this.validateForm(event);
-    if(IsValid)
-    {
-      this.setState({savingResend:true}); 
-
-      this.setState({savingResend:false}); 
-    }
-  }
-
   redirectToResetPassword()
-  {
+  {    
     this.context.router.push('/resetpassword');
   }
 
@@ -87,11 +78,11 @@ class AccountRecovery extends Component {
                     <p>We will send a one time passcode to your email address,This helps show that this account really belongs to you</p>
                     <div className="panel-body">
                       <form role="form" autoComplete="off" className="needs-validation form">
-                      <ErrorList errors={this.props.errors} />
+                      <ErrorList errors={this.state.errors} />
                         <div className="form-group">
                           <div className="input-group">
                             <span className="input-group-addon"><i className="glyphicon glyphicon-envelope color-blue"></i></span>
-                            <input id="email" name="email" placeholder="email address" className="form-control" type="email" 
+                            <input id="email" name="Email" placeholder="email address" className="form-control" type="email" 
                               onChange={this.onChange} 
                               value={this.state.profile.Email} 
                               required />
@@ -101,16 +92,13 @@ class AccountRecovery extends Component {
                           <input name="recover-submit" className="btn btn-lg btn-primary btn-block" type="submit" 
                           onClick={this.SendCode} 
                           value={this.state.saving ? "Submitting ..." : "Send code"}
-                          disabled={this.state.saving ? true:false}/>
-                          {
-                                this.state.otpSent && (
-                                <input name="resend-recover-submit" className="btn btn-lg btn-primary btn-block" type="submit" 
-                                onClick={this.ReSendCode} 
-                                value={this.state.savingResend ? "Submitting ..." : "I did not get it, ReSend"}
-                                disabled={this.state.savingResend ? true:false}/>
-                          )}
-                        </div>                        
-                        <input type="hidden" className="hide" name="token" id="token" value="" />
+                          disabled={this.state.saving ? true:false}/>                          
+                        </div> 
+                        <div className="form-group">                          
+                          <Link to="signin" className="btn btn-lg btn-primary btn-block">
+                            Cancel
+                          </Link>
+                        </div>                                               
                       </form>
                     </div>
                   </div>
@@ -135,9 +123,14 @@ AccountRecovery.contextTypes = {
   router: PropTypes.object
 };
 
-function mapStateToProps (state,ownProps){   
+function mapStateToProps (state,ownProps){
+  let profile = { Email: "ysidibe85@gmai.com"};  
+  if(state.profile != null && state.profile.Email != null)
+  {
+    profile =  Object.assign({},state.profile);    
+  } 
   return { 
-          profile: state.profile, 
+          profile: profile, 
           errors: state.profile.errors ? state.profile.errors : []
         };
 }

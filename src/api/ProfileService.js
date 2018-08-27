@@ -47,7 +47,7 @@ export default class ProfileService {
             //         let response = { errors: errors, success: false, userProfile : profile};
             //         reject(response); 
             //     });  
-            resolve({ errors: [], success: true, userProfile : profile,confirmEmailCallBackUrl : ''});                      
+            resolve({ errors: [], success: true, userProfile : profile,confirmEmailCallBackUrl : ''});
         });
     }
 
@@ -64,6 +64,34 @@ export default class ProfileService {
             resolve({});
         });  
             
+    }
+
+    static SendOTP(profile)
+    {
+        return new Promise((resolve, reject) => {
+            // axios.post('https://localhost:44350/api/v1/user/sendOtp', profile, getAxiosConfig())
+            //     .then((resp) => {                                        
+                    
+            //     })
+            //     .catch((err) => {                       
+                    
+            //     }).then(() => {resolve({});})        
+            resolve(profile);
+        });  
+    }
+
+    static ResetUserPassword(profile)
+    {
+        return new Promise((resolve, reject) => {
+            // axios.post('https://localhost:44350/api/v1/user/resetPassword', profile, getAxiosConfig())
+            //     .then((resp) => {                                        
+                    
+            //     })
+            //     .catch((err) => {                       
+                    
+            //     }).then(() => {resolve({});})        
+            resolve(profile);
+        });  
     }
 
 }

@@ -121,7 +121,6 @@ body {
 {
     border-radius: 0em;
 }
-<<<<<<< HEAD
 
 .vertical-line
 {
@@ -142,8 +141,12 @@ body {
     padding-top: 20px;
     padding-bottom: 0;
 }
-=======
->>>>>>> b2c27e5611c6c549d341f541553945af4604d50e
+
+  /* .main-home > div
+  {
+      -webkit-transform: translateX(calc(-100% + 150px));
+      transform: translateX(calc(-100% + 150px));
+  } */
 
 @media (min-width: 767px){
     .navbar-nav > li{
