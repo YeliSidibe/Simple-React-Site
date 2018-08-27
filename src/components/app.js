@@ -15,17 +15,6 @@ import LoadingComponent from './common/loadingDots';
         </div>
         <Header loading={this.props.loading} profile={this.props.profile} />
         {this.props.children}
-        {/* <div className="navbar nav-scroller bg-dark fixed-bottom">
-          <nav className="nav nav-underline">
-            <a className="nav-link active" href="#">Dashboard</a>
-            <a className="nav-link" href="#">
-              Friends
-          <span className="badge badge-pill bg-light align-text-bottom">27</span>
-            </a>
-            <a className="nav-link" href="#">Explore</a>
-            <a className="nav-link" href="#">Suggestions</a>          
-          </nav>
-        </div>  */}
       </div>
     );
   }
@@ -38,7 +27,7 @@ App.propTypes = {
 };
 
 function mapStateToProps(state,ownProps)
-{      
+{        
   return {
     loading: state.ajaxCallsInProgress > 0,
     profile: state.profile

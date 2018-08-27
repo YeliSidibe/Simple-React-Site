@@ -27,8 +27,14 @@ body {
   }
   .offcanvas-collapse.open {
     left: 120px;
-    visibility: visible;
+    visibility: visible;	
   }
+
+  /* .main-home > div
+  {
+      -webkit-transform: translateX(calc(-100% + 150px));
+      transform: translateX(calc(-100% + 150px));
+  } */
 }
 
 .nav-scroller {

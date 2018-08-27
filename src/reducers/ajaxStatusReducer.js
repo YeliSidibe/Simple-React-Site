@@ -6,13 +6,16 @@ function actionTypeEndsInSuccess(type) {
     return endAction;
   }
 
-export default function ajaxStatusReducer(state = initialState.ajaxCallsInProgress,action){    
-    if(action.type == Types.BEGIN_AJAX_CALL){        
-        return state + 1;
-    }
-    else if(actionTypeEndsInSuccess(action.type)){            
-        return state - 1;
-    }         
+export default function ajaxStatusReducer(state = initialState.ajaxCallsInProgress,action){   
+    if(action.type)
+    {
+        if(action.type == Types.BEGIN_AJAX_CALL){        
+            return state + 1;
+        }
+        else if(actionTypeEndsInSuccess(action.type)){            
+            return state - 1;
+        } 
+    }        
     return state;
 }
 

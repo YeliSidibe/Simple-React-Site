@@ -122,6 +122,26 @@ body {
     border-radius: 0em;
 }
 
+.vertical-line
+{
+    height: 100%;
+    width: 0;
+    margin: 0 0 0 1rem;
+    color: white;
+    border: 1px solid; 
+}
+#home-buttons-section
+{
+    margin-bottom: 60px;
+}
+
+#home-bottom
+{
+    height: 80px;
+    padding-top: 20px;
+    padding-bottom: 0;
+}
+
 @media (min-width: 767px){
     .navbar-nav > li{
         border-bottom: initial;

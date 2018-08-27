@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import TextInputHtmlControl from "../common/textInputHtmlControl";
 import ErrorList from '../common/errorslist';
 import Facebook from './facebook';
+import {Link} from 'react-router';
 
 export default class loginForm extends Component
 {
@@ -58,7 +59,9 @@ export default class loginForm extends Component
                         </div>
                         <div className="col-md-12 mb-1 d-flex justify-content-end">
                             <div className="form-check">
-                                <a><span className="text-primary form-check-label" htmlFor="forgotPassword">Forgot Password?</span></a>
+                                <Link to="accountrecovery" className="text-primary form-check-label">
+                                            Forgot Password?
+                                </Link>
                             </div>
                         </div>
                     </div>

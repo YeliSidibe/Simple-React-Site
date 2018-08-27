@@ -9,7 +9,8 @@ export default class identityMenu extends Component {
     constructor(props)
     {        
         super(props);
-        let isLoggedIn = props.profile != null && props.profile.success == true;        
+        let isLoggedIn = props.profile != null && props.profile.success == true;  
+        console.log('isLoggedIn here ' + isLoggedIn); 
         this.state = {isLoggedIn : isLoggedIn};        
     }
     componentWillReceiveProps(nextProps)

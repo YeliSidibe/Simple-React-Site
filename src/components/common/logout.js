@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as RegisterActions from '../../actions/RegisterActions';
 
-
 class Logout extends Component
 {
     constructor(props,context)
@@ -16,7 +15,7 @@ class Logout extends Component
     {
        event.preventDefault();
        // should clear user session
-       this.props.LogoutAction(this.props.profile);       
+       this.props.LogoutAction(this.props.profile);
        this.props.ShowHideCanvas();
        this.context.router.push('/');
     }    
