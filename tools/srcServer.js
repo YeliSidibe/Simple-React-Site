@@ -4,14 +4,14 @@ import path from "path";
 import config from "../webpack.config.dev";
 import open from "open";
 /* eslint-disable no-console */
-var https = require('https');
-var fs = require('fs');
+const https = require('https');
+const fs = require('fs');
 
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
 
-var sslOptions = {
+const sslOptions = {
   key: fs.readFileSync('./tools/key.pem'),
   cert: fs.readFileSync('./tools/cert.pem'),
   passphrase: 'admin' 
