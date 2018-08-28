@@ -56,6 +56,12 @@ class ResetPassword extends Component {
   ResetUserPassword(event)
   {
     let IsValid = this.validateForm(event);
+    if(IsValid && this.state.profile.NewPassword != this.state.profile.ConfirmPassword) 
+    { 
+      IsValid = false;
+      this.setState({errors:['The password do not match']});
+    }
+
     if(IsValid)
     {
       this.setState({saving:true}); 
@@ -83,14 +89,15 @@ class ResetPassword extends Component {
                         <ErrorList errors={this.state.errors} />
                         <div className="form-group">
                           <div className="input-group">
-                            <input id="passcode" name="passcode" placeholder="6 digits passcode" className="form-control text-center" type="text" 
-                              onChange={this.onChange}                                
+                            <input id="passcode" name="PassCode" placeholder="6 digits passcode" className="form-control text-center" type="text" 
+                              onChange={this.onChange}  
+                              value={this.state.profile.PassCode}                              
                               required />
                           </div>
                         </div>
                         <div className="form-group">
                           <div className="input-group">
-                            <input id="password" name="NewPassword" placeholder="New password " className="form-control text-center" type="text" 
+                            <input id="password" name="NewPassword" placeholder="New password " className="form-control text-center" type="password" 
                               value={this.state.profile.NewPassword}
                               onChange={this.onChange}                                
                               required />
@@ -98,7 +105,7 @@ class ResetPassword extends Component {
                         </div>
                         <div className="form-group">
                           <div className="input-group">
-                            <input id="confirmpassword" name="ConfirmPassword" placeholder="Confirm New password" className="form-control text-center" type="text" 
+                            <input id="confirmpassword" name="ConfirmPassword" placeholder="Confirm New password" className="form-control text-center" type="password" 
                               value={this.state.profile.ConfirmPassword}
                               onChange={this.onChange}                                
                               required />
@@ -106,7 +113,7 @@ class ResetPassword extends Component {
                         </div>
                         <div className="form-group">
                           <input name="submit" className="btn btn-lg btn-primary btn-block" type="submit"
-                            onClick={this.ReSendCode}
+                            onClick={this.ResetUserPassword}
                             value={this.state.savingResend ? "Submitting ..." : "Reset Password"}
                             disabled={this.state.savingResend ? true : false} />
                         </div>
@@ -146,7 +153,7 @@ ResetPassword.contextTypes = {
 };
 
 function mapStateToProps (state,ownProps){ 
-  let profile = { Email: "",NewPassword:"",ConfirmPassword:""};  
+  let profile = { Email: "",NewPassword:"",ConfirmPassword:"",PassCode:""};  
   if(state.profile != null && state.profile.Email != null)
   {    
     profile.Email =  state.profile.Email;

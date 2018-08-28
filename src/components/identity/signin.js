@@ -84,7 +84,7 @@ export class signin extends Component {
   {
       if(response.id)
       {        
-          let facebookProfile  = {Email: response.email,FirstName:response.first_name,LastName:response.last_name,externalProviderLogin:true};            
+          let facebookProfile  = {Email: response.email,FirstName:response.first_name,LastName:response.last_name,externalProviderLogin:true,picture: response.picture.data.url};            
           this.LoginWithFacebook(facebookProfile);
       }
       else

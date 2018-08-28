@@ -148,6 +148,12 @@ body {
       transform: translateX(calc(-100% + 150px));
   } */
 
+.profile-picture
+{
+    width: 40px;
+    height:40px;
+}
+
 @media (min-width: 767px){
     .navbar-nav > li{
         border-bottom: initial;

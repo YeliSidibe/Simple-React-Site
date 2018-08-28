@@ -21,7 +21,11 @@ export default class userProfile extends Component {
                 <ul className="navbar-nav mr-auto list-header-menu ul-header-custom">            
                     <li className="nav-item active">
                         <a className="nav-link" href="/profile" >
-                            <div className="menu-icons"><i className="fa fa-user-circle"></i></div>
+                            <div className="menu-icons">
+                                {this.props.profile.userProfile.picture == null &&<i className="fa fa-user-circle"></i>} 
+                                {this.props.profile.userProfile.picture != null &&
+                                <img src={this.props.profile.userProfile.picture} alt={this.props.profile.FirstName} className="profile-picture"/>}                                 
+                            </div>
                             <div id="username-profile">{this.props.profile.userProfile.Email}&nbsp;&nbsp;</div>
                         </a>
                     </li>
