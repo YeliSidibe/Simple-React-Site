@@ -9,8 +9,7 @@ export default function registerReducer(state = initialState.profile,action)
         case Types.LOG_IN_SUCCESS:            
             return state = Object.assign({},action.profile);
         case Types.LOG_OUT_SUCCESS:
-            state = initialState;
-            return state;
+        return state = Object.assign({},action.profile);
         case Types.SEND_RECOVERY_CODE_SUCCESS:
             return state = Object.assign({},action.profile);
         case Types.RESET_USER_PASSWORD_SUCCESS:

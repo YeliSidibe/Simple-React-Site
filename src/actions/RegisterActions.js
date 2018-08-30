@@ -15,7 +15,7 @@ export function LoginSuccess(profile)
 }
 export function LogoutSuccess(profile)
 {
-    return {type:Types.LOG_OUT_SUCCESS,profile:profile};
+    return {type:Types.CLEAR_STORE_SUCCESS,profile:profile};
 }
 export function SendRecoveryCodeSuccess(profile)
 {

@@ -15,9 +15,9 @@ class Logout extends Component
     {
        event.preventDefault();
        // should clear user session
-       this.props.LogoutAction(this.props.profile);       
-       this.props.ShowHideCanvas();
-       this.context.router.push('/');
+       this.props.LogoutAction(this.props.profile)
+       .then(() => {this.props.ShowHideCanvas();
+        this.context.router.push('/signin');});       
     }    
     
     render()

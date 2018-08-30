@@ -18,8 +18,9 @@ export default (
         <Route path="vehicle" component={ManageVehicle}/>        
         <Route path="vehicle/:Id" component={ManageVehicle}/>
         <Route path="register" component={Register}/>
-        <Route path="signin" component={Signin}/>\
+        <Route path="signin" component={Signin}/>
         <Route path="accountrecovery" component={AccountRecovery}/>
         <Route path="resetpassword" component={ResetPassword}/>
+        <Route path="home" component={Home}/>
     </Route>
 );

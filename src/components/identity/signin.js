@@ -20,9 +20,8 @@ export class signin extends Component {
       this.redirectToRegister  = this.redirectToRegister.bind(this);
   }
 
-  componentDidMount(){}
   componentWillReceiveProps(nextProps)
-  {       
+  {           
       if(nextProps.success != null && nextProps.profile != null && nextProps.profile.externalProviderLogin != true)
       {
           this.setState({profile: Object.assign({},nextProps.profile),errors:nextProps.errors,success:nextProps.success});
@@ -97,7 +96,7 @@ export class signin extends Component {
   {         
     if(this.state.success)
     {                  
-      this.context.router.push('/vehicles');
+      this.context.router.push('/home');
     }         
   }
 
@@ -138,7 +137,7 @@ function mapStateToProps (state,ownProps){
   let profile = { Email: "ysidibe85@gmail.com", Password: "P@ssword1" };  
   if(state.profile.success != null)
   {
-    profile =  Object.assign({},state.profile.userProfile);    
+    profile =  Object.assign({},state.profile.userProfile);     
   }  
   return { 
           profile: profile, 
