@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-export default class Home extends React.Component {
+export default class Home extends React.Component {  
   render() {
     return (
       <main role="main"> 
@@ -8,7 +8,7 @@ export default class Home extends React.Component {
               <p>welcome, ultra responsive swap app</p>                
           </div>       
           <div className="fixed-bottom d-flex justify-content-center" id="home-buttons-section">
-                <Link to="signin" className="form-control btn btn-primary btn-lg w-75">
+                <Link to="/signin" className="form-control btn btn-primary btn-lg w-75">
                   <i className="fa fa-lock fa-fw"></i>
                     Log in / Sign up
                 </Link>

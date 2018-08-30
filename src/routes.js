@@ -13,7 +13,7 @@ import ResetPassword from './components/identity/resetpassword';
 
 export default (
     <Route path="/" component={App}>    
-        <IndexRoute component={Home}/>
+        <IndexRoute component={Signin}/>
         <Route path="vehicles" component={Vehicles} />        
         <Route path="vehicle" component={ManageVehicle}/>        
         <Route path="vehicle/:Id" component={ManageVehicle}/>

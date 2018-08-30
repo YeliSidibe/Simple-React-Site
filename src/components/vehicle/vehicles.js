@@ -13,7 +13,7 @@ class vehicles extends Component {
   }
   
   componentWillMount()
-  {    
+  {        
     if (!this.props.profile.success) { browserHistory.push('/signin');}
   }
 

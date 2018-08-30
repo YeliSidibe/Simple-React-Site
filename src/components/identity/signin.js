@@ -17,15 +17,10 @@ export class signin extends Component {
       this.componentClicked = this.componentClicked.bind(this);
       this.facebookCallbackFunction = this.facebookCallbackFunction.bind(this);
       this.onFailure = this.onFailure.bind(this);
-      this.redirectToRegster  = this.redirectToRegster.bind(this);
+      this.redirectToRegister  = this.redirectToRegister.bind(this);
   }
 
   componentDidMount(){}
-  
-  redirectToRegster()
-  {    
-    this.context.router.push('/register');
-  }
   componentWillReceiveProps(nextProps)
   {       
       if(nextProps.success != null && nextProps.profile != null && nextProps.profile.externalProviderLogin != true)
@@ -37,7 +32,7 @@ export class signin extends Component {
           this.setState({errors:nextProps.errors,success:nextProps.success}); // when facebook login update state errors and success flag
       }
   }
-
+  
   onChange(event) 
   {
     const field = event.target.name;
@@ -67,24 +62,18 @@ export class signin extends Component {
 
   }
 
-  redirectToMainPage()
-  {     
-    if(this.state.success)
-    {            
-      this.context.router.push('/vehicles');
-    }         
-  }
-  
   componentClicked(event)
   {
-        
+      
   }
+
   onFailure(e) { throw('Systemic Error occured ...');  }
   facebookCallbackFunction(response)
-  {
+  {          
       if(response.id)
       {        
-          let facebookProfile  = {Email: response.email,FirstName:response.first_name,LastName:response.last_name,externalProviderLogin:true,picture: response.picture.data.url};            
+          let facebookProfile  = {Email: response.email,FirstName:response.first_name,LastName:response.last_name
+                                  ,externalProviderLogin:true,picture: response.picture.data.url};            
           this.LoginWithFacebook(facebookProfile);
       }
       else
@@ -94,10 +83,22 @@ export class signin extends Component {
   }
 
   LoginWithFacebook(p)
-  {        
+  {            
       this.props.actions.Login(p)
       .then(() => { this.redirectToMainPage(); }) 
       .catch((error) => { this.setState({errors:error.errors});});
+  }
+
+  redirectToRegister()
+  {    
+    this.context.router.push('/register');
+  }
+  redirectToMainPage()
+  {         
+    if(this.state.success)
+    {                  
+      this.context.router.push('/vehicles');
+    }         
   }
 
   render() {
@@ -105,7 +106,7 @@ export class signin extends Component {
       <div className="container center-form-container mt-3">
         <div className="row px-2">
           <b className="col px-2">Log In</b>
-          <a onClick={this.redirectToRegster}><span className="right pr-2 text-primary">Sign up</span></a>
+          <a onClick={this.redirectToRegister}><span className="right pr-2 text-primary">Sign up</span></a>
         </div>
         <LoginForm
               profile={this.state.profile}

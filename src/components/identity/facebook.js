@@ -7,8 +7,7 @@ export default class Facebook extends Component {
     constructor(props,context)
     {
        super(props,context);
-       this.state = {isLoggedIn : false,userId : '',name:'',email:'',picture:''};
-      
+       this.state = {isLoggedIn : false,userId : '',name:'',email:'',picture:''};       
     }    
     
     renderFacebookElement(renderProps)

@@ -27,6 +27,7 @@ export default class userProfile extends Component {
                                 <img src={this.props.profile.userProfile.picture} alt={this.props.profile.FirstName} className="profile-picture"/>}                                 
                             </div>
                             <div id="username-profile">{this.props.profile.userProfile.Email}&nbsp;&nbsp;</div>
+                            {/* <div id="username-profile">{this.props.profile.userProfile.FirstName + ' ' + this.props.profile.userProfile.LastName}&nbsp;&nbsp;</div> */}
                         </a>
                     </li>
                 </ul> 
