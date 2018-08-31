@@ -1,43 +1,60 @@
-import React from 'react';
+import React,{PropTypes} from 'react';
 import {Link} from 'react-router';
-export default class Home extends React.Component {  
+import * as vehicleActions from '../../actions/vehicleActions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {browserHistory} from 'react-router';
+
+class Home extends React.Component {  
+
+  constructor(props)
+  {
+    super(props);    
+  }
+
+  componentWillMount()
+  {          
+    if (!this.props.profile.success) { browserHistory.push('/signin');}
+  }
+
   render() {
     return (
-      <main role="main"> 
+      <main role="main">       
           <div className="d-flex flex-columns justify-content-center">
-              <p>welcome, ultra responsive swap app</p>                
+              <p>Available Swaps</p>
           </div>       
-          <div className="fixed-bottom d-flex justify-content-center" id="home-buttons-section">
-                <Link to="/signin" className="form-control btn btn-primary btn-lg w-75">
-                  <i className="fa fa-lock fa-fw"></i>
-                    Log in / Sign up
+          <div className="fixed-bottom d-flex flex-column justify-content-center">
+                <Link to="/addVehicle" className="form-control btn btn-primary btn-lg">
+                  <i className="fa fa-lock fa-plus"></i>
+                     &nbsp;Add New Vehicle
                 </Link>
-          </div>  
-        <div className="navbar nav-scroller bg-dark fixed-bottom justify-content-center" id="home-bottom">
-          <nav className="nav nav-underline">            
-            <a className="nav-link text-white d-flex flex-rows" href="#">
-                <div className="d-flex flex-column">
-                  <i className="fa fa-money"></i>
-                  <span>Quick Swap</span>
-                </div>
-                <hr className="vertical-line"/>
-            </a>
-            <a className="nav-link text-white d-flex flex-rows px-0" href="#">
-                <div className="d-flex flex-column">
-                  <i className="fa fa-search"></i>
-                  <span>Search</span>
-                </div>              
-                <hr className="vertical-line"/>
-            </a>
-            <a className="nav-link text-white d-flex flex-rows" href="#">  
-            <div className="d-flex flex-column">          
-                <i className="fa fa-compass"></i>
-                <span>Track Swap</span>
-            </div>
-            </a>
-          </nav>
-        </div>
+          </div>          
       </main>
     );
   }
 }
+
+
+Home.propTypes = {
+  profile: PropTypes.object,
+  actions: PropTypes.object,
+};
+
+function mapStateToProps (state,ownProps){  
+  let profile = {};  
+  if(state.profile.success == true)
+  {        
+    profile =  Object.assign({},state.profile);     
+  }  
+  return { 
+          profile: profile          
+        };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(vehicleActions, dispatch)    
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
